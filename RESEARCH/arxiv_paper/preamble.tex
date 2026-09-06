@@ -1,0 +1,172 @@
+\usepackage{siunitx}
+\DeclareSIUnit{\nothing}{\relax}
+\sisetup{
+    detect-weight=true, % enable \bfseries to highlight bold values with correct indent
+    table-number-alignment = center  % Good alignment with empty cells
+}
+\usepackage{acronym}
+\usepackage{csquotes}
+\usepackage{placeins}
+\usepackage{makecell}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{pifont}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{ifthen}
+\usepackage{xparse}
+\usetikzlibrary{calc,fit,backgrounds,shapes.arrows,shapes.geometric,decorations.pathreplacing,decorations.text}
+\usepackage{tikz-3dplot}
+\usepackage{enumitem}
+\usepackage{nicefrac}
+\usepackage{subcaption}
+\usepackage{enumitem}
+% Johann prompts
+\usepackage[most]{tcolorbox}
+\definecolor{darkGreen}{RGB}{22, 119, 53}
+\definecolor{lightGreen}{RGB}{198, 226, 208}
+\definecolor{myGreen}{RGB}{22, 119, 53}
+\usepackage{tabularx}
+% Johann Qualitatives
+% \usepackage[a4paper,margin=1.5cm]{geometry}
+\usepackage{pifont}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{booktabs}
+\usepackage{pifont}
+\usepackage{ragged2e}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{longtable}
+% --- inline annotations
+%
+\newcommand{\go}[1]{\textcolor{gray!70}{#1}}
+\newcommand{\red}[1]{{\color{red}#1}}
+\newcommand{\todo}[1]{{\color{red}#1}}
+\newcommand{\TODO}[1]{\textbf{\color{red}[TODO: #1]}}
+\newcommand{\WIP}[1]{\textit{\color{teal}[WIP: #1]}}
+\newcommand{\TBD}[1]{\textcolor{red}{\textbf{#1}}}
+\newcommand{\missingref}[1]{\textcolor{red}{[REF?]}}
+\newcommand{\rb}[1]{\rotatebox{90}{#1}}
+\newcommand{\gap}[1]{\makebox[#1]{}}
+% --- disable by uncommenting  
+% \renewcommand{\TODO}[1]{}
+% \renewcommand{\todo}[1]{#1}
+
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+\newcommand{\gcmark}{\textcolor{teal}{\ding{51}}}
+%\newcommand{\rcmark}{\textcolor{teal}{\ding{51}$^\text{†}$}}
+\newcommand{\rcmark}{\textcolor{teal}{(\ding{51})}}
+\newcommand{\rxmark}{\textcolor{red}{\ding{55}}}
+\newcommand{\gqmark}{\textcolor{gray}{?}}
+\newcommand{\up}{\ding{115}}
+\newcommand{\aup}{$\uparrow$}
+\newcommand{\adown}{$\downarrow$}
+
+\newcommand{\best}[1]{\textbf{#1}}
+\newcommand{\second}[1]{\textit{#1}}
+%\newcommand{\best}[1]{#1}
+%\newcommand{\second}[1]{#1}
+
+\newcommand{\tbf}[1]{\textbf{#1}}
+\newcommand{\tul}[1]{\underline{#1}}
+
+\makeatletter
+\newcommand\notsotiny{\@setfontsize\notsotiny\@vipt\@viipt}
+\makeatother
+
+\newlength{\BenImgWidth}
+%\setlength{\BenImgWidth}{43.7mm}
+\setlength{\BenImgWidth}{24mm}
+\def\arrayStretchFactor{0.97}
+
+\input{color_definitions}
+
+\newcommand{\legendbox}[2]{%
+  \textcolor{#1}{\rule{1.5ex}{1.5ex}}\,#2%
+}
+\def\centerarc[#1](#2)(#3:#4:#5)% Syntax: [draw options] (center) (initial angle:final angle:radius)
+    { \draw[#1] ($(#2)+({#5*cos(#3)},{#5*sin(#3)})$) arc (#3:#4:#5); }
+\newcommand*\circled[1]{\tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt] (char) {#1};}}
+
+\newcommand{\bentxt}{\texttt{BigEarthNet.txt}}
+\newcommand{\bench}{\text{benchmark split}}
+%\newcommand{\genExp}{\text{\ac{LULC} expression}}
+\newcommand{\genDet}{referring expression detection}
+%\newcommand{\pointExp}{point \ac{LULC} expression}
+\newcommand{\pointDet}{referring point detection}
+%\newcommand{\refExp}{referring \ac{LULC} expression}
+\newcommand{\refDet}{referring \ac{LULC} detection}
+
+\newcommand{\clickablelabel}[1]{%
+    \stepcounter{enumi}% increment counter
+    \llap{\hyperref[#1]{\Alph{enumi}.}}
+}
+
+\input{tables/results/table_abbreviations}
+
+\renewcommand{\arraystretch}{1.0} % Distance between rows
+\setlength{\tabcolsep}{2.3pt} % Distance between columns
+
+% Examples captioning
+\definecolor{boxblue}{RGB}{74,138,181}
+\definecolor{lightbg}{RGB}{248,248,248}
+
+\newcommand{\ultratiny}{\fontsize{3}{4}\selectfont}
+\newcommand{\microfont}{\fontsize{4.2}{5}\selectfont}
+\newcommand{\legendfont}{\fontsize{6}{7}\selectfont}
+\newcommand{\smallboxfont}{\fontsize{4.4}{5.2}\selectfont}
+\newcommand{\bigboxfont}{\fontsize{7}{8.4}\selectfont}
+\tikzset{
+  captionbox/.style={
+    draw=boxblue,
+    rounded corners=3pt,
+    line width=0.8pt,
+    fill=lightbg,
+    inner sep=2pt,
+    align=left
+  },
+  row1captionbox/.style={
+    captionbox,
+    text width=0.28\textwidth
+  },
+  row2captionbox/.style={
+    captionbox,
+    text width=0.295\textwidth
+  },
+  lhrsbox/.style={
+    captionbox,
+    text width=0.37\textwidth
+  },
+  % widecaptionbox/.style={
+  %   captionbox,
+  %   text width=8.5cm
+  % },
+  hugecaptionbox/.style={
+    captionbox,
+    text width=12.5cm
+  },
+  icon/.style={
+    circle,
+    draw=gray!60,
+    fill=white,
+    minimum size=7mm,
+    inner sep=0pt
+  },
+  % legendbox/.style={
+  %   draw=gray!50,
+  %   rounded corners=3pt,
+  %   fill=white,
+  %   inner sep=4pt
+  % }
+}

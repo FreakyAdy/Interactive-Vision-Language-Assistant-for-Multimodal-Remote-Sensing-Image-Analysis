@@ -727,3 +727,105 @@ async def run_demo_scenario(scenario_id: str) -> Dict[str, Any]:
         res["sensor_badge"] = f"ISRO {matched.sensor}"
         res["total_processing_ms"] = 48.2
         return res
+
+
+# ---------------------------------------------------------------------------
+# BigEarthNet.txt (arXiv:2603.29630) Real Multi-Sensor & RS-InternVL Routes
+# ---------------------------------------------------------------------------
+
+@router.get(
+    "/api/bigearthnet/tasks",
+    summary="List 15 BigEarthNet.txt Tasks",
+    tags=["BigEarthNet.txt"],
+)
+async def list_bigearthnet_tasks() -> Dict[str, Any]:
+    """Returns the 15 tasks across 4 categories defined in arXiv:2603.29630."""
+    try:
+        from backend.core.bigearthnet_loader import ALL_TASKS, TASK_CATEGORIES
+        return {
+            "dataset": "BigEarthNet.txt (arXiv:2603.29630)",
+            "total_tasks": len(ALL_TASKS),
+            "categories": TASK_CATEGORIES,
+            "tasks": ALL_TASKS
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
+@router.get(
+    "/api/bigearthnet/sample",
+    summary="Get Real Multi-Sensor Benchmark Sample",
+    tags=["BigEarthNet.txt"],
+)
+async def get_bigearthnet_sample() -> Dict[str, Any]:
+    """
+    Retrieves real co-registered Sentinel-1 SAR (RTC) and Sentinel-2 Optical (TCI)
+    benchmark imagery and reference map from the BigEarthNet.txt paper.
+    """
+    try:
+        from backend.core.bigearthnet_loader import BigEarthNetRealDataLoader
+        loader = BigEarthNetRealDataLoader()
+        sample = loader.get_real_sample()
+        return {
+            "status": "ok",
+            "patch_id": sample["patch_id"],
+            "country": sample["country"],
+            "season": sample["season"],
+            "climate_zone": sample["climate_zone"],
+            "latitude": sample["latitude"],
+            "longitude": sample["longitude"],
+            "dominant_lulc": sample["dominant_lulc"],
+            "available_tasks": list(sample["tasks"].keys()),
+            "files": sample["files"],
+            "parquet_status": sample["parquet_status"]
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post(
+    "/api/bigearthnet/infer",
+    summary="Run RS-InternVL Multi-Sensor Inference",
+    tags=["BigEarthNet.txt"],
+)
+async def infer_bigearthnet(
+    task: str = Form("captioning", description="Task name (e.g. captioning, binary_presence, mcq_season, referring_lulc_detection)"),
+) -> Dict[str, Any]:
+    """
+    Executes real RS-InternVL multi-sensor inference using real Sentinel-1 SAR and
+    Sentinel-2 multispectral rasters for the specified task.
+    """
+    try:
+        from backend.core.bigearthnet_loader import BigEarthNetRealDataLoader
+        from ml_models.rs_internvl import RSInternVL
+
+        loader = BigEarthNetRealDataLoader()
+        model = RSInternVL()
+        model.eval()
+
+        res = loader.evaluate_task(model, task)
+        return {
+            "status": "ok",
+            "model": "RS-InternVL (InternVL-3-1B + S1 SAR + S2 MS + LoRA)",
+            "result": res
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get(
+    "/api/bigearthnet/benchmark-results",
+    summary="Get Official Benchmark Evaluation Results",
+    tags=["BigEarthNet.txt"],
+)
+async def get_bigearthnet_benchmark_results() -> Dict[str, Any]:
+    """Returns official benchmark split metrics from arXiv:2603.29630 comparing RS-InternVL with SOTA."""
+    try:
+        from ml_models.evaluate_bigearthnet_txt import PAPER_BENCHMARK_SOTA
+        return {
+            "dataset": "BigEarthNet.txt Benchmark Split (1,082 verified image pairs)",
+            "sota_comparison": PAPER_BENCHMARK_SOTA
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+

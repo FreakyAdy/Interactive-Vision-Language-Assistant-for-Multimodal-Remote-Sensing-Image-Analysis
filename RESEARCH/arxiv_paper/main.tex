@@ -1,0 +1,148 @@
+\documentclass[runningheads]{llncs}
+
+% ---------------------------------------------------------------
+% Include basic ECCV package
+ 
+% TODO REVIEW: Insert your submission number below by replacing '*****'
+% TODO FINAL: Comment out the following line for the camera-ready version
+%\usepackage[review,year=2026,ID=5892]{eccv}
+% TODO FINAL: Un-comment the following line for the camera-ready version
+%\usepackage[year=2026,ID=5892]{eccv}
+\usepackage[preprint]{eccv}
+
+% OPTIONAL: Un-comment the following line for a version which is easier to read
+% on small portrait-orientation screens (e.g., mobile phones, or beside other windows)
+%\usepackage[mobile]{eccv}
+
+
+% ---------------------------------------------------------------
+% Other packages
+
+% Commonly used abbreviations (\eg, \ie, \etc, \cf, \etal, etc.)
+\usepackage{eccvabbrv}
+
+% Include other packages here, before hyperref.
+\usepackage{graphicx}
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+% The "axessiblity" package can be found at: https://ctan.org/pkg/axessibility?lang=en
+\usepackage[accsupp]{axessibility}  % Improves PDF readability for those with disabilities.
+
+
+% ---------------------------------------------------------------
+% Hyperref package
+
+% It is strongly recommended to use hyperref, especially for the review version.
+% Please disable hyperref *only* if you encounter grave issues.
+% hyperref with option pagebackref eases the reviewers' job, but should be disabled for the final version.
+%
+% If you comment hyperref and then uncomment it, you should delete
+% main.aux before re-running LaTeX.
+% (Or just hit 'q' on the first LaTeX run, let it finish, and you
+%  should be clear).
+
+% TODO FINAL: Comment out the following line for the camera-ready version
+\usepackage[breaklinks,colorlinks,citecolor=eccvblue]{hyperref}
+% TODO FINAL: Un-comment the following line for the camera-ready version
+%\usepackage{hyperref}
+
+% Support for ORCID icon
+\usepackage{orcidlink}
+
+\input{preamble}
+
+\begin{document}
+
+% ---------------------------------------------------------------
+% TODO REVIEW: Replace with your title
+\title{BigEarthNet.txt: A Large-Scale Multi-Sensor Image-Text Dataset and Benchmark for Earth Observation} 
+
+% TODO REVIEW: If the paper title is too long for the running head, you can set
+% an abbreviated paper title here. If not, comment out.
+\titlerunning{BigEarthNet.txt}
+
+% TODO FINAL: Replace with your author list. 
+% Include the authors' OCRID for the camera-ready version, if at all possible.
+\author{
+Johann-Ludwig Herzog\inst{*1}\orcidlink{0009-0001-2294-2301} \and
+Mathis Jürgen Adler\inst{*1}\orcidlink{0009-0007-1865-1492} \and
+Leonard Hackel\inst{1}\orcidlink{0000-0002-5831-1237} \and
+Yan Shu\inst{2} \and
+Angelos Zavras\inst{3}\orcidlink{0009-0008-2788-1940} \and
+Ioannis Papoutsis\inst{3} \and
+Paolo Rota\inst{2} \and
+Begüm Demir\inst{1}\orcidlink{0000-0003-2175-7072}
+}
+
+% TODO FINAL: Replace with an abbreviated list of authors.
+\authorrunning{J.~Herzog et al.}
+% First names are abbreviated in the running head.
+% If there are more than two authors, 'et al.' is used.
+
+% TODO FINAL: Replace with your institution list.
+\institute{BIFOLD and Technische Universität Berlin \and
+University of Trento \and
+National Technical University and National Observatory of Athens\\
+\textsuperscript{*}\notsotiny These authors contributed equally to this work.\\
+\vspace{1em}
+\normalsize \url{https://txt.bigearth.net}}
+
+\input{sec/_acronyms}
+
+\maketitle
+% \def\thefootnote{*}\footnotetext{These authors contributed equally to this work}\def\thefootnote{\arabic{footnote}}
+\sloppy
+\input{sec/0_abstract}   
+\acresetall
+
+\section{Introduction}
+\label{sec:intro}
+\input{sec/1_intro}
+
+\section{Related work}
+\label{sec:related_works}
+\input{sec/2_relatedWork}
+
+\section{BigEarthNet.txt Dataset}
+\label{sec:bigearth_txt}
+\input{sec/3_bigearth_txt}
+
+% \section{Multi-Sensor InternVL}
+% \label{sec:locationVLM}
+% \input{sec/4_vlm}
+
+\section{Experiments}
+\label{sec:experiments}
+\input{sec/5_experiments}
+
+\section{Conclusion}
+\label{sec:conclusion}
+\input{sec/6_conclusion}
+
+\section*{Acknowledgements}
+We thank Kai Norman Clasen for his support at the initial phase of this work.
+
+% ---- Bibliography ----
+%
+% BibTeX users should specify bibliography style 'splncs04'.
+% References will then be sorted and formatted in the correct style.
+%
+\FloatBarrier
+\clearpage
+\bibliographystyle{splncs04}\
+\bibliography{main}
+
+\FloatBarrier
+\clearpage
+\setcounter{section}{0}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{page}{1}
+\renewcommand{\thesection}{\Alph{section}}
+% \section{Supplementary Material}
+%\label{sec:supplementary}
+%\input{sec/X_supplementary}
+\end{document}

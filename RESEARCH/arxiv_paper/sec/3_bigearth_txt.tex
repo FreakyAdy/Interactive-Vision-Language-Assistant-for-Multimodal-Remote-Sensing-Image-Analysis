@@ -1,0 +1,67 @@
+To address the scarcity of large-scale multi-sensor image-text datasets in \ac{RS}, we introduce \bentxt{}, which comprises co-registered \ac{S1} and \ac{S2} images with semantically rich natural-language annotations relevant for 15 tasks across 4 broad categories: i)~captioning; ii)~binary and iii)~multiple-choice \ac{VQA}; and iv)~\genDet. The co-registered \ac{S1} and \ac{S2} images in \bentxt{} are taken from BigEarthNet~v2.0~\cite{clasen2025reben}, which comprises \num{549488} pairs of \ac{S1} and \ac{S2} images acquired over ten European countries. Each pair is accompanied by a pixel-level \ac{LULC} reference map based on the \ac{CLC} 2018 product  (\texttt{V2020\_20u1})~\cite{clcbook}. Some images in BigEarthNet~v2.0 are partly covered by seasonal snow, clouds, and cloud shadows, and also associated with reference maps containing unclassified pixels (with no LULC label). To construct our dataset, we filter out such image pairs, resulting in \num{464044} co-registered \ac{S1} and \ac{S2} images. In the following, we describe in detail our annotation generation pipeline, present the caption statistics and then finally introduce our \bench{}.  
+
+\subsection{Annotation Generation Pipeline}
+The textual annotations for \bentxt{} are generated through a three-stage pipeline (template-based caption generation, \ac{LLM}-based linguistic augmentation, \ac{VQA} and \ac{LULC} annotation generation). 
+An overview of the caption generation and linguistic augmentation stage is given in \cref{fig:caption_generation_process}.
+\paragraph{Template-based caption generation.} We first construct captions by extracting four categories of spatial attributes directly from the reference maps: the \textit{presence} of \ac{LULC} classes, the \textit{count} of individual contiguous regions per class (instances), the \textit{size} of each class in total and per instance, and pairwise spatial \textit{adjacency} between classes. 
+Area values are rounded to the nearest \SI{1000}{\meter\squared} to reduce label noise. 
+Classes are assigned to one of three tiers based on their image coverage:
+i)~\textit{primary} (> \SI{25}{\percent}); 
+ii)~\textit{secondary} (\SI{5}{\percent} - \SI{25}{\percent}); or
+iii)~\textit{marginal} (<\SI{5}{\percent}).
+Captions are composed from pre-defined templates that contain classes, sizes, and adjacency relations accordingly. 
+Each caption is further grounded in spatio-seasonal context by appending the acquisition season, country, and Köppen-Geiger climate zone~\cite{beckHighresolution1Km2023}, derived from high-resolution climate maps.
+
+\paragraph{LLM-based linguistic augmentation.} Although template-based captions guarantee factual correctness, they exhibit limited linguistic variety. 
+Therefore, we apply a two-stage augmentation using the quantized Llama-4-Scout-17B model~\cite{touvron2023llamaopenefficientfoundation}.
+First, a \textit{paraphrasing} step diversifies lexical and syntactic structure while prohibiting the addition of unsupported information.
+Second, a \textit{self-refinement} step \cite{self-refinement} revises the paraphrased output against the original template to eliminate hallucinated content and restore missing information. 
+To further increase valid lexical variation, the prompt includes the \ac{CLC} nomenclature, permitting semantically valid substitutions (\eg referring to \emph{Urban fabric} collectively as \emph{Artificial surfaces}). 
+Manual evaluation of \num{3209} randomly sampled augmented captions against four binary criteria (linguistic correctness, factual accuracy, completeness, and absence of generation artifacts) yields an average correctness of \SI{93.76}{\percent}, with \SI{77.50}{\percent} of captions satisfying all four criteria simultaneously.
+\input{figures/generation_process_v6}
+\paragraph{VQA and \genDet{} generation.} We further augment each image pair with question-answer annotations relevant for binary yes/no \ac{VQA}, \ac{MCQ} \ac{VQA}, and \genDet. 
+Binary questions target the four spatial categories from the captioning stage (presence, count, size, adjacency), with one \enquote{yes} and one \enquote{no} answer generated per pair. 
+To prevent \enquote{no} answers from being solvable by class-absence detection alone, count and size questions are constructed such that the queried class is present but the stated quantity is incorrect; presence and adjacency \enquote{no} questions use semantically similar classes from the \ac{CLC} hierarchy. 
+\Acp{MCQ} extend the four spatial categories from the captioning stage with questions about relative class position, acquisition country, season, and Köppen-Geiger climate zone.
+Each set of answers for the \acp{MCQ} includes one correct answer and three incorrect ones, sampled by analogous principles to the binary \acp{VQA}. 
+For \genDet, we generate \refDet{} instructions targeting instances covering between \SI{1}{\percent} and \SI{50}{\percent} of the image area and at least \SI{40}{\percent} of their enclosing bounding box, along with \pointDet{} instructions for instances whose centroid lies within the instance region. 
+Examples are given in \cref{fig:dataset_overview}.
+Each annotation type uses more than 20 linguistic templates to ensure variability without relying on \ac{LLM} augmentation. 
+In total, each image pair is associated with up to 16 \ac{VQA} pairs, and approximately \SI{80}{\percent} of pairs carry at least one \genDet{} annotation.
+
+\subsection{Caption Statistics\label{sec:statistics}}
+The caption annotations of \bentxt{} contain approximately \num{50} million words and \num{2.1} million sentences, averaging 107 words and \num{4.5} sentences. 
+The vocabulary comprises \num{12394} unique terms. 
+Caption lengths follow a bimodal distribution (\cref{fig:pdf_caption_length}) corresponding to single-class and multi-class scenes: single-class captions are shorter due to the absence of adjacency descriptions, while multi-class captions vary with scene complexity. 
+Sentence counts per caption (\cref{fig:pdf_sentences_per_caption}) peak between four and six, reflecting the predominance of complex scenes. 
+As shown in \cref{fig:mtld_score}, the caption annotations of \bentxt{} achieve a \ac{MTLD} score of \num{64.69}, surpassing the largest existing image-text \ac{RS} dataset containing images with more than three bands (MS-CLIP~\cite{marimo2025beyond}) by more than $1.7\times$. 
+Additionally, caption annotations of \bentxt{} encompass $\sim$\SI{25}{\percent} more words in half as many samples compared to MS-CLIP. This shows that \bentxt{} is not only lexically more diverse, but also richer in the semantic content per caption.
+\begin{figure}[h!tb]
+\centering
+    \subfloat[\notsotiny Length ($\nicefrac{\text{Words}}{\text{Caption}}$)]{
+        \raisebox{0mm}{\rotatebox{90}{\hspace{3mm}\textsf{\notsotiny Density of Occurrences}}}
+        \includegraphics[width=0.44\linewidth,trim=30 32 0 0, clip]{figures/dataset/caption_length_caption_index_2_density.pdf}
+        \label{fig:pdf_caption_length}
+    }\hfill
+    \subfloat[\notsotiny Length ($\nicefrac{\text{Sentences}}{\text{Caption}}$)]{
+        \raisebox{0mm}{\rotatebox{90}{\hspace{3mm}\textsf{\notsotiny Density of Occurrences}}}
+        \includegraphics[width=0.44\linewidth,trim=30 32 0 0, clip]{figures/dataset/caption_num_sentences_index_2_density.pdf}
+        \label{fig:pdf_sentences_per_caption}
+    }\par 
+    \subfloat[Number of Image-Text Pairs]{
+        \raisebox{0mm}{\rotatebox{90}{\hspace{10mm}\textsf{MTLD Score}}}
+        \includegraphics[width=0.45\linewidth,trim=30 30 30 0, clip]{figures/dataset/mtld_score_index_2.pdf}
+        \raisebox{0mm}{\rotatebox{90}{\hspace{8mm}\textsf{Number of Words}}}
+    \label{fig:mtld_score}
+    }
+    \caption{\Ac{PDF} of (a) caption lengths and (b) number of sentences in a caption in the \bentxt{} dataset.
+     (c) Comparison of existing image-text \ac{RS} datasets in terms of size and semantic richness of the text data. The \ac{NLTK} word tokenizer is used to divide the captions and questions into tokens. The color of each point indicates the total number of tokens in the dataset. Datasets that encompass images with more than three spectral bands are denoted with a star. The \bentxt{} dataset is $1.7\times$ more diverse compared to the largest existing \ac{RS} dataset encompassing more than three bands.}
+    \label{fig}
+\end{figure}
+
+\subsection{The \bentxt{} \bench{}}
+
+We divide \bentxt{} into train, validation, and test splits as in BigEarthNet~v2.0, resulting in \num{229114}, \num{118095}, and \num{116835} image pairs and \num{4674281}, \num{2454690}, and \num{2424991} text annotations, respectively. However, because LLM-augmented captions may contain hallucinated content, we construct a curated \bench{} to enable reliable model evaluation on the annotations introduced in \bentxt{}. The \bench{} contains \num{1082} image pairs with \num{15029} text annotations from the test split whose augmented captions passed manual verification on all four quality dimensions.
+To expose answer-bias in evaluated models, binary and \ac{MCQ} annotations are balanced across answer options.
+Annotations are further balanced across \ac{LULC} classes to the extent permitted by their natural distribution. 
+Overall, the \bench{} contains \num{6927} binary and \num{5550} multiple-choice \ac{VQA} annotations, \num{970} captions, and \num{1582} \genDet{} annotations across \num{1082} image pairs.

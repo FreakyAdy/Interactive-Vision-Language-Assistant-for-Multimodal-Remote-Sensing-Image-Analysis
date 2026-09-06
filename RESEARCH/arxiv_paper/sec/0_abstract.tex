@@ -1,0 +1,13 @@
+\begin{abstract}
+\Acp{VLM} have shown strong performance in \ac{CV}, yet their performance on \ac{RS} data remains limited due to the lack of large-scale, multi-sensor \ac{RS} image-text datasets with diverse textual annotations. 
+Existing datasets predominantly include aerial \acl{RGB} imagery, with short or weakly grounded captions, and provide limited diversity in annotation types. 
+To address this limitation, we introduce \bentxt{}, a large-scale, multi-sensor image-text dataset designed to advance instruction-driven image-text learning in \acl{EO} across multiple tasks. 
+\bentxt{} contains \num{464044} co-registered \acl{S1} \acl{SAR} and \acl{S2} \acl{MS} images with \SI{9.6}{\mega\nothing} text annotations, including:
+%each associated with: 
+i) geographically anchored captions describing \ac{LULC} classes, their spatial relations, and environmental context;
+ii) \acl{VQA} pairs relevant for different tasks; and
+iii) \genDet{} instructions for bounding box prediction.
+Through a comparative statistical analysis, we demonstrate that \bentxt{} surpasses existing \ac{RS} image-text datasets in textual richness and annotation type variety. 
+We further establish a manually-verified \bench{} to evaluate \acp{VLM} in \ac{RS} and \ac{CV}. The results show the limitations of these models on tasks that involve complex \ac{LULC} classes, whereas fine-tuning using \bentxt{} results in consistent performance gains across all considered tasks. 
+\keywords{ Multi-Sensor Image-Text Dataset \and Vision-Language Models \and Earth Observation \and Remote Sensing }
+\end{abstract}

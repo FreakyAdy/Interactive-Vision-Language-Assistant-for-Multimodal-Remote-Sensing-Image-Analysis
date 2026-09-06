@@ -1,0 +1,43 @@
+% All checked
+% Counted unexpected answers with IoU = 0.0
+\begin{table}[h!bt]
+    \centering
+    \renewcommand{\arraystretch}{\arrayStretchFactor}
+    % \scriptsize
+    % \setlength{\tabcolsep}{1pt}
+    %\caption{Bounding Box Results of RS VLMs for the \textbf{referring expression} task (794 total samples). The subscripts \textit{rect} and \textit{arb} indicate the shape of the convex hull used for the GIoU calculation. The superscript \textit{*} indicates that the output bounding boxes are \textbf{not} rotated. \textsubscript{F.} indicates that the original bench samples are subsampled, to exclude images already seen by the model during training, i.e. earthdial is left with 264 samples.}
+    \caption{Results on \pointDet{} for \ac{VLM}s in \ac{RS} and \ac{CV} in terms of \ac{mIoU}, and accuracy@$k$ (where a prediction is counted as correct if the overlap with the reference is greater than $k\%$). \instructionfollowedABBR\ shows whether an unambiguous answer could be extracted all the time.}
+    \begin{tabular}{l *5{S[table-format=2.2]} *1{S[table-format=3.2]}}
+        \toprule
+        {Model} 
+        & {mIoU}
+        & {Acc@25} 
+        & {Acc@50} 
+        & {Acc@75} 
+        & {Acc@90}
+        & {\instructionfollowedABBR} \\ % 788 BBox - point samples
+        \midrule
+        % GeoChat*    & {--} & {--} & {--} & {--} & {--} & \\
+        % GeoChat     & 2.34 & 3.55 & 1.14 & 0.13 & 0.00 & 0 \\
+        % \geochatABBR\textsuperscript{*} & 2.34 & 3.55 & 1.14 & 0.13 & 0.00 &  \\ % 658 19.76
+        \geochatABBR & 2.16 & 3.43 & 0.63 & 0.13 & 0.00 & \rxmark \\ % 658 19.76
+        \lhrsbotABBR & 3.09 & 0.25 & 0.00 & 0.00 & 0.00 & \rxmark \\
+        \skyeyegptABBR & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \rxmark \\
+        % \earthdialrgbABBR\textsuperscript{*} & 5.27 & 3.05 &  0.13 &  0.00 &  0.00 & \best{100.00} \\
+        \earthdialrgbABBR & 5.26 & 3.05 &  0.13 &  0.00 &  0.00 & \gcmark \\
+        % \earthdialmsABBR\textsuperscript{*} & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & 0.13 \\ % 787
+        \earthdialmsABBR & 0.00 & 0.00 & 0.00 & 0.00 & 0.00 & \rxmark \\ % 0.13
+        \earthmindrgbABBR & 9.35 & 14.21 & 4.57 & 1.27 & 0.13 & \rxmark \\ % 249 68.40
+        \earthmindsarmsABBR & 12.65 & 17.51 & 5.08 & 0.89 & 0.13 & \rxmark \\
+        \midrule
+        \gptABBR & \best{38.95} & \best{64.21} & \best{35.53} & \best{8.63} & \best{2.79} & \gcmark \\
+        \qwenABBR & 20.42 & 28.81 & 8.25 & 0.89 & 0.00 & \gcmark \\
+        \glmABBR & \second{32.16} & \second{56.09} & \second{22.46} & \second{4.82} & \second{1.40} & \gcmark \\
+        \llavaABBR & 17.27 & 19.67 & 3.17 & 0.51 & 0.13 & \gcmark \\
+        \internvlABBR & 6.52 & 3.05 & 0.00 & 0.00 & 0.00 & \rxmark \\
+        % \midrule
+        % \textbf{\internvlrsABBR} & \best{69.95} & \best{95.43} & \best{82.23} & \best{48.22} & \best{12.69} & \best{100.00} \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:bb_point_results}
+\end{table}

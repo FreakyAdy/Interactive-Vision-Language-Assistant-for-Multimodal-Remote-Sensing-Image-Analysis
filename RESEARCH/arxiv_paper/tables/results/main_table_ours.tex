@@ -1,0 +1,45 @@
+% All checked except Captioning
+% Fill TBD values
+\begin{table}[h!tb]
+    \centering
+    \renewcommand{\arraystretch}{\arrayStretchFactor}
+    % \footnotesize
+    \caption{Results on the main tasks of the \bentxt{} benchmark split for the fine-tuned adapted RS-InternVL model as well as best results from \ac{VLM}s in \ac{RS} and \ac{CV}, which are \earthmindrgbABBR{} and \llavaABBR{} for captioning, \earthdialrgbABBR{} and \qwenABBR{} for binary \ac{VQA}, \earthmindsarmsABBR{} and \qwenABBR{} for \ac{MCQ}, and \earthmindsarmsABBR{} and \gptABBR{} for \genDet. 
+    Reported metric for captioning is BLEU-4, while that for binary \ac{VQA}, and \ac{MCQ} is accuracy, and that for \genDet{} is mIoU. All results are in percent (\%).}
+    \begin{tabular}{l *5{S[table-format=2.2]}}
+        \toprule
+        {Model}
+        & {\makecell{Captioning}}
+        & {\makecell{Binary VQA}}
+        & {\makecell{MCQ}} 
+        & {\makecell{Ref. Exp.\\Detection}}% Formula for calculation: ref * 0.5019 + point * 0.4981
+        \\
+        \midrule
+        % GeoChat      & 0.81 & 51.31 &  6.37 & 28.13 \\ NO AREA PROMPT
+        % GeoChat~\cite{kuckreja2024geochat} & \geochatABBR & $\text{S2}_{RGB}$ & 7B & 0.75 & 50.82 & 4.25 & 28.36 \\ % 4.36 if non-rotated BBs are taken
+        % % LHRS-Bot     & 0.61 & 47.91 & 5.18 & 23.30 \\ NO AREA PROMPT
+        % LHRS-BOT~\cite{muhtar2024lhrs} & \lhrsbotABBR & RGB  & 7B & 0.43 & 48.23 & 4.14 & 22.99 \\
+        % SkyEyeGPT~\cite{zhan2025skyeyegpt} & \skyeyegptABBR & RGB & 7B & 0.00 & 48.87 & 5.92 & 27.60 \\
+        % EarthDial~\cite{soni2025earthdial} & \earthdialrgbABBR & RGB & 4B & 0.62 & 58.38 & 6.63 & 32.94 \\ % 6.79 if non-rotated BBs are taken
+        % EarthDial~\cite{soni2025earthdial} & \earthdialmsABBR & S2 & 4B & 0.00 & 44.06 & 0.48 & 8.43 \\
+        % EarthMind~\cite{shu2025earthmind} & \earthmindrgbABBR & RGB & 4B & \best{1.66} & 57.90 & 15.08 & 34.25 \\
+        % % EarthMind~\cite{shu2025earthmind} & \earthmindmsABBR & S2 & 4B & {TBD} & {TBD} & {TBD} & {TBD} \\
+        % EarthMind~\cite{shu2025earthmind} & \earthmindsarmsABBR & S1, S2 & 4B & \second{1.46} & 57.79 & 16.18 & 35.26 \\
+        % \midrule
+        % GPT-5.2~\cite{openai2025gpt5} & \gptABBR & RGB & 2T* & 0.30 & \second{60.39} & \best{31.73} & 34.93 \\
+        % % Qwen3-VL & 0.69 & 61.99 & 16.79 & 38.29 \\ NO AREA PROMPT
+        % Qwen3-VL~\cite{bai2025qwen3} & \qwenABBR & RGB & 8B & 0.57 & \best{61.96} & 18.60 & \best{37.55} \\
+        % % GLM-4.6v-Flash & 0.62 & 53.47 & 20.27 & 34.65 \\ NO AREA PROMPT
+        % GLM-4.6v-Flash~\cite{5team2025glm45agenticreasoningcoding} & \glmABBR & RGB & 10B & 0.79 & 56.59 & \second{26.19} & 34.45 \\
+        % % LLaVa-OV & 1.11 & 59.07 & 21.98 & 36.54 \\ NO AREA PROMPT
+        % LLaVa-OV~\cite{li2024llavaonevisioneasyvisualtask} & \llavaABBR & RGB & 7B & 0.96 & 58.60 & 19.63 & \second{36.27} \\
+        % InternVL-3 (1B)~\cite{zhu2025internvl3} & \internvlABBR & RGB & 1B & 0.45 & 54.11 & 5.21 & 26.76 \\
+        % % InternVL-3 (8B) & 0.72 & {--} & 10.12 & {--} \\
+        \ac{SOTA} \ac{RS} & 1.66 & 58.38 & 35.26 & 16.18 \\
+        \ac{SOTA} \ac{CV} & 0.96 & 61.96 & 37.55 & 31.73  \\
+        \midrule
+        \textbf{RS-InternVL} & \best{34.04} & \best{73.29} & \best{51.49} & \best{65.84} \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:main_ours}
+\end{table}

@@ -1,0 +1,65 @@
+\subsection{Performance Evaluation of VLMs for RS Tasks}
+To benchmark \bentxt{} we have considered a wide range of general-purpose \ac{CV} and specialized \ac{RS} \acp{VLM}. In detail, we select five \ac{SOTA} models each from the \ac{CV} and \ac{RS} domain. For the \ac{CV} domain, we select GPT-5.2~\cite{openai2025gpt5}\footnote{OpenAI API, endpoint /v1/chat/completions}, Qwen3-VL~\cite{bai2025qwen3}, GLM-4.6v-Flash~\cite{hong2025glm}, LLaVa-OneVision~\cite{li2024llavaonevision}, and InternVL3-1B~\cite{zhu2025internvl3}, denoted as \gptABBRns, \qwenABBRns, \glmABBRns, \llavaABBRns, and \internvlABBRns, respectively. For the \ac{RS} domain, we select GeoChat~\cite{kuckreja2024geochat}, LHRS-Bot~\cite{muhtar2024lhrs}, SkyEyeGPT~\cite{zhan2025skyeyegpt}, EarthDial~\cite{soni2025earthdial}, and EarthMind~\cite{shu2025earthmind}, denoted as \geochatABBRns, \lhrsbotABBRns, \skyeyegptABBRns, \earthdialrgbABBRns/\earthdialmsABBRns, and \earthmindrgbABBRns/\earthmindsarmsABBRns, respectively.
+The majority of these models accept only \ac{RGB} inputs; for these, we provide only the \ac{RGB} bands of \ac{S2} during inference.
+As EarthDial and EarthMind also accept multispectral and multi-sensor inputs, we evaluate each under two configurations:
+i) \earthdialrgbABBRns{} and \earthmindrgbABBRns{} using \ac{RGB} inputs; and
+ii) \earthdialmsABBRns{} and \earthmindsarmsABBRns{} using 12 \ac{S2} bands and \ac{S1}+12 \ac{S2} bands as input, respectively.
+We provide the \bentxt{} instructions by default, with additional instructions to follow the output format and model specific tokens where necessary. 
+We extract answers even when they do not adhere exactly to the specified format. 
+To reduce computational resources during evaluation, we disable thinking for \glmABBRns.
+Throughout the paper, we report the results on the \bench{} only.
+
+\cref{tab:main} shows the results obtained for each of our general categories: captioning, binary \ac{VQA}, \ac{MCQ}, and \genDet{}, grouped by \ac{RS} specialized \acp{VLM} (top) and general-purpose \ac{CV} \acp{VLM} (bottom).
+From the table, one can observe that none of the \acp{VLM} in general provides good performance, while \ac{CV} \acp{VLM} perform better than \ac{RS} \acp{VLM} in general despite processing only \ac{RGB} input.
+This is because \ac{CV} \acp{VLM} exhibit stronger generalizability and instruction-following ability (Tab.~\ref{tab:binary_results}--\ref{tab:bb_point_results}), whereas most \ac{RS} \acp{VLM} are mainly suitable for tasks achievable using solely \ac{RGB} data.
+\input{tables/results/main_table}
+The considered \ac{CV} \acp{VLM} may also have been pretrained using some \ac{RS} data, which is a growing trend in recent works~\cite{simeoni2025dinov3}.
+Additionally, models accepting multispectral (\earthdialmsABBRns) or multi-sensor (\earthmindsarmsABBRns) inputs show no consistent benefit (and in some cases decreased performance) compared to their \ac{RGB} counterparts.
+This is because their pre-training and fine-tuning data largely consist of \ac{RGB} images, and the models were therefore not trained to exploit the additional spectral information provided at inference.
+Even \gptABBR{}, which is the largest model, scores only 60.39\% on binary \ac{VQA} and 34.93\% on \ac{MCQ} due to its inherent \ac{RGB} data limitation.
+\cref{tab:binary_results} shows detailed per-task results for binary \ac{VQA}.
+From the table, one can clearly observe that for some tasks, models perform noticeably better (\eg, \SI{69.34}{\percent} accuracy for EarthMind on the binary \emph{presence} task).
+\input{tables/results/binary}
+This good result on presence \ac{VQA} is expected, as determining whether a \ac{LULC} class appears in an image is closely analogous to scene classification, which is a dominant objective in \ac{RS} \ac{VLM} pre-training datasets~\cite{kuckreja2024geochat, muhtar2024lhrs, zhan2025skyeyegpt, soni2025earthdial, shu2025earthmind, hu2025rsgpt}.
+Nevertheless, none of these models, including the largest, \gptABBRns, achieve consistently strong performance across all binary \ac{VQA} tasks.
+In \cref{tab:mcq_results}, one can observe the performance on the \ac{MCQ} tasks.
+\input{tables/results/mcq}
+These results closely mirror the binary \ac{VQA} findings: the best performance is again observed on tasks that most closely resemble typical pre-training objectives.
+Beyond understanding the image content, instruction-following is an additional challenge: most \ac{RS} models struggle to consistently adhere to the \ac{MCQ} format, as this task is less common in \ac{RS} \ac{VLM} pre-training data and thus less reliably learned.
+The results on \refDet{} and \pointDet{} are presented in \cref{tab:bb_reference_results} and \cref{tab:bb_point_results}.
+For models trained on segmentation rather than bounding box prediction, we derive bounding boxes from their segmentation outputs.
+In \refDet, models must identify and localize a target instance from a textual description alone, without any spatial prior.
+In \pointDet, models are additionally provided with a point within the target instance, and must predict the enclosing bounding box.
+As one can see from the table, several models from the \ac{CV} domain perform substantially better on \pointDet{} than on \refDet.
+We think that the provided point allows models with strong general spatial reasoning to constrain the predicted box to the vicinity of the given location, reducing the task to local boundary estimation rather than open-vocabulary instance search.
+GPT achieves the best performance on both task types, mainly owing to its scale and the breadth of its pre-training data.
+\input{tables/results/bbox_reference}
+\input{tables/results/bbox_point}
+Finally, \cref{tab:captioning} shows the obtained performance on the captioning task across several metrics.
+\input{tables/results/captioning}
+We employ n-gram-based (BLEU, ROUGE, METEOR, CIDEr), embedding-based (BERTScore, SBERT-Cosine \cite{zhang2019bertscore, reimers-gurevych-2019-sentence}), and \ac{LLM}-based metrics (CLAIR~\cite{chan-etal-2023-clair}).
+For CLAIR, an \ac{LLM} is prompted to output a score between 0 and 100 for a candidate caption based on how likely it describes the same image as the reference caption. We use the distilled reasoning model \textit{DeepSeek-R1-Distill-Qwen-32B} with greedy decoding as the judge.
+We observe that all evaluated \ac{SOTA} \acp{VLM} have limited capabilities in describing existing \ac{LULC} classes and their spatial composition in detail.
+
+In general, these results demonstrate that \ac{SOTA} \acp{VLM} currently fall short on tasks requiring multi-sensor spectral information and complex \ac{LULC} understanding.
+Exceptions arise when a task closely resembles the model's pre-training objectives, \eg, EarthMind's strong performance on binary presence \ac{VQA}.
+This suggests that the poor generalization to other \bentxt{} tasks is primarily a consequence of insufficient pre-training data, rather than an inherent limitation of the model architectures themselves.
+
+\subsection{Results of Multi-Sensor InternVL (RS-InternVL)}
+
+%To demonstrate that strong performance on the \bentxt{} \bench{} is achievable given adequate task-relevant training data, 
+Using the training and validation sets of \bentxt{}, we fine-tune a \ac{SOTA} \ac{VLM} adapted to accommodate multi-sensor input and evaluate it on the \bench{}. To this end, we build on InternVL-3-1B~\cite{zhu2025internvl3} as a backbone and introduce modality-specific branches for \ac{S1} and \ac{S2} inputs, while we retain the original InternVL components. The architecture is denoted as (\ac{RS}-InternVL). 
+For each sensor modality, a pretrained \ac{ViT} produces patch embeddings, which are aligned to the InternVL \ac{LLM} embedding space via linear projection layers.
+The projected \ac{S1} and \ac{S2} tokens are concatenated with the \ac{RGB} tokens and the tokenized instruction before being passed to the \ac{LLM}.
+To preserve pretrained representations and reduce computational complexity, all \ac{ViT} backbones are frozen. 
+Only the modality-specific projections and LoRA adapters for the \ac{LLM} (rank 8, $\alpha=32$, dropout \num{0.1}) are trained, resulting in \SI{5.8}{\mega\nothing} trainable parameters out of \SI{1.1}{\bel\nothing} in total.
+We initialize the \ac{S1} and \ac{S2} encoders with BigEarthNet-pretrained \acp{ViT}~\cite{clasen2025reben}, removing their classification heads. 
+We process only the \SI{10}{\meter} and \SI{20}{\meter} bands of \ac{S2}, as the \SI{60}{\meter} bands are primarily used for cloud screening and atmospheric correction and carry limited information for semantic \ac{RS} image understanding~\cite{sumbul2021bigearthnet}.
+Training uses a linear warm-up cosine annealing schedule, increasing the learning rate from $10^{-6}$ to $10^{-4}$ over the first \SI{1}{\percent} of steps, followed by cosine decay.
+We fine-tune separately for each task to provide per-task baselines.
+The model is fine-tuned on the combined training and validation sets for one epoch and evaluated on the \bentxt{} \bench{}.
+Fine-tuning takes approximately two days on four NVIDIA H200 GPUs in total.
+
+\cref{tab:main_ours} shows the results obtained by RS-InternVL on the general categories.
+From the table, one can see that, once a model is fine-tuned on pairs of \ac{S1} and \ac{S2} data with diverse text annotations, performance on the \bench{} improves substantially across all tasks, even at small model scale.
+\input{tables/results/main_table_ours}

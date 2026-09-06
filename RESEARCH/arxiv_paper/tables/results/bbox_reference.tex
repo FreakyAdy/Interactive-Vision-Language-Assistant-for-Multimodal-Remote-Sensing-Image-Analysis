@@ -1,0 +1,48 @@
+% All checked
+% Counted unexpected answers with IoU = 0.0
+\begin{table}[h!bt]
+    \centering
+    \renewcommand{\arraystretch}{\arrayStretchFactor}
+    % \scriptsize
+    % \setlength{\tabcolsep}{1pt}
+    %\caption{Bounding Box Results of RS VLMs for the \textbf{referring expression} task (794 total samples). The subscripts \textit{rect} and \textit{arb} indicate the shape of the convex hull used for the GIoU calculation. The superscript \textit{*} indicates that the output bounding boxes are \textbf{not} rotated. \textsubscript{F.} indicates that the original bench samples are subsampled, to exclude images already seen by the model during training, i.e. earthdial is left with 264 samples.}
+    \caption{Results on \refDet{} for \ac{VLM}s in \ac{RS} and \ac{CV} in terms of \ac{mIoU}, and accuracy@$k$ (where a prediction is counted as correct if the overlap with the reference is greater than $k\%$). All results are in percent (\%). \instructionfollowedABBR\ shows whether an unambiguous answer could be extracted all the time.}
+    \begin{tabular}{l *5{S[table-format=2.2]} *1{S[table-format=3.2]}}
+        \toprule
+        {Model} 
+        & {mIoU}
+        & {Acc@25} 
+        & {Acc@50} 
+        & {Acc@75} 
+        & {Acc@90}
+        & {\instructionfollowedABBR} \\ % 794 BBox - reference samples
+        \midrule
+        % \geochatABBR\textsuperscript{*}    & 6.37 & 8.44 & 1.01 & 0.00 & 0.00 & \gcmark \\ % No rotation
+        \geochatABBR   & 7.51 & 11.34 & 1.51 & 0.00 & 0.00 & \gcmark \\ % Rotation
+        \lhrsbotABBR   & 7.47 & 12.59 & 1.89 & 0.50 & 0.00 & \rxmark \\
+        \skyeyegptABBR & 12.12 & 20.03 & 6.55 & 2.27 & 0.13 & \gcmark \\
+        % \earthdialrgbABBR\textsuperscript{*} & 8.29 & 11.84 & 2.52 & 0.13 & 0.00 & \gcmark \\
+        % \earthdialrgbABBR   & 7.99 & 10.58 & 2.39 & 0.25 & 0.00 & \gcmark \\
+        \earthdialrgbABBR   & 8.99 & 12.85 & 2.02 & 0.00 & 0.00 & \gcmark \\
+        % \earthdialmsABBR\textsuperscript{*} & 0.96 & 0.38 & 0.00 & 0.00 & 0.00 & \rxmark \\ % 485
+        % \earthdialmsABBR   & 0.96 & 0.38 & 0.00 & 0.00 & 0.00 & \rxmark \\ % 485
+        \earthdialmsABBR   & 0.98 & 0.63 & 0.00 & 0.00 & 0.00 & \rxmark \\ % 533 % Calculate over both categories
+        % \earthmindrgbABBR   & 14.86 & 24.18 & 11.46 & 4.16 & \second{1.13} & \rxmark \\ % 263
+        \earthmindrgbABBR   & 21.90 & 35.52 & \second{17.88} & \best{5.67} & \best{1.39} & \rxmark \\ % 59 
+        % \earthmindsarmsABBR & 19.69 & 32.75 & 13.10 & 3.65 & 0.76 & \rxmark \\ % 54 93.20
+        \earthmindsarmsABBR & 22.65 & \second{38.41} & 16.62 & \second{4.53} & 1.01 & \rxmark \\ % 35
+        % For EarthMind, the model cannot output a BB (it was not trained on BB at all), but it can segment
+        % Problem in EarthMind is not instruction following, but the returned segmentation map is empty (or non was outputted)
+        \midrule
+        % \gptABBR & \best{24.56} & \best{40.81} & \best{17.88} & \best{4.53} & \second{1.13} & \gcmark \\
+        \gptABBR & \best{25.16} & \best{40.81} & \best{19.52} & 4.28 & \second{1.26} & \gcmark \\
+        \qwenABBR & 15.60 & 25.31 & 9.95 & 2.39 & 0.38 & \gcmark \\
+        \glmABBR & 22.35 & 37.03 & 16.75 & 3.53 & \best{1.39} & \gcmark \\
+        \llavaABBR & \second{23.04} & \second{38.41} & 15.74 & 3.90 & 0.63 & \gcmark \\
+        \internvlABBR & 5.01 & 5.29 & 0.88 & 0.00 & 0.00 & \rxmark \\
+        % \midrule
+        % \textbf{\internvlrsABBR} & \best{33.16} & \second{47.73} & \best{34.38} & \best{18.77} & \best{6.55} & \gcmark \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:bb_reference_results}
+\end{table}

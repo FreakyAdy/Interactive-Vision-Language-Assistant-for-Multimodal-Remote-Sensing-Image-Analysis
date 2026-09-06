@@ -1,0 +1,48 @@
+% All checked
+% Area prompt for area questions included
+% Counted unexpected answers as incorrect
+\begin{table}[tb]
+    \centering
+    \renewcommand{\arraystretch}{\arrayStretchFactor}
+    \caption{Results on the binary VQA tasks for \ac{VLM}s in \ac{RS} and \ac{CV}: Presence, Area, Counting, Adjacency, and Overall, denoted as \presenceABBR, \areaABBR, \countABBR, \adjacencyABBR, and \overallABBR, in terms of accuracy. All results are in percent (\%). \instructionfollowedABBR\ shows whether an unambiguous answer could be extracted all the time.}
+    \begin{tabular}{l *5{S[table-format=2.2]} *1{S[table-format=3.2]}}
+        \toprule
+        {\thead{Model}}
+        & {\presenceABBR}
+        & {\areaABBR}
+        & {\countABBR}
+        & {\adjacencyABBR}
+        & {\overallABBR}
+        & {\instructionfollowedABBR} % Idea: Maybe give the percentage of followed instructions, 6927 binary samples
+        \\
+        \midrule
+        % GeoChat & 51.65 & 49.46 & 43.57 & 55.51 & 51.31 & \bfseries 0 \\ NO AREA PROMPT
+        \geochatABBR & 51.65 & 46.86 & 43.57 & 55.51 & 50.82 & \gcmark \\
+        % LHRS-Bot & 48.83 & 49.54 & 49.23 & 46.10 & 47.91 & 51 \\ NO AREA PROMPT
+        \lhrsbotABBR & 48.83 & 51.23 & 49.23 & 46.10 & 48.23 & \rxmark \\ % 38
+        % SkyEyeGPT & 51.51 & 52.07 & 45.71 & 46.83 & 48.59 & \bfseries 0 \\
+        \skyeyegptABBR & 52.19 & 51.61 & 46.63 & 46.94 & 48.87 & \gcmark \\
+        %ED\textsubscript{RGB} & 65.10 & 53.14 & 51.99 & 60.62 & 58.51 & 14 \\
+        \earthdialrgbABBR & 64.47 & 53.06 & 51.99 & \best{60.62} & 58.38 & \rxmark \\ % 14
+        % ED\textsubscript{MS} & 56.99 & 58.99 & 53.61 & 54.53 & 55.49 & 1427 \\ % With area prompt
+        \earthdialmsABBR & 37.45 & 40.20 & 47.17 & 47.78 & 44.06 & \rxmark \\ % 1427
+        \earthmindrgbABBR & \best{69.34} & 56.20 & 51.07 & 55.97 & 57.90 & \gcmark \\
+        \earthmindsarmsABBR & \second{69.07} & 54.59 & 50.15 & 56.98 & 57.79 & \gcmark \\
+        \midrule
+        \gptABBR & 61.59 & \best{67.38} & \second{61.94} & 55.86 & \second{60.39} & \gcmark \\
+        %Qwen & 63.37 & 68.07 & 61.64 & 58.66 & 61.99 & 0 \\
+        \qwenABBR & 64.33 & \second{66.62} & \best{62.33} & 58.45 & \best{61.96} & \gcmark \\
+        % GLM & 60.01 & 64.40 & 54.75 & 53.03 & 56.97 & \bfseries 0 \\ NO AREA PROMPT
+        \glmABBR & 60.01 & 62.40 & 54.75 & 53.03 & 56.59 & \gcmark \\
+        % LLaVa & 62.07 & 60.72 & 54.36 & 58.94 & 59.07 & \bfseries 0 \\ NO AREA PROMPT
+        \llavaABBR & 62.07 & 58.19 & 54.36 & \second{58.94} & 58.60 & \gcmark \\ 
+        % InternVL & 58.09 & 50.80 & 53.52 & 55.01 & 54.58 & 2 \\ NO AREA PROMPT
+        % InternVL (1B) & 57.27 & 47.55 & 50.34 & 55.39 & 53.36 & 2 \\
+        \internvlABBR & 56.24 & 48.77 & 51.61 & 56.60 & 54.11 & \rxmark \\
+        % \midrule
+        % \textbf{\internvlrsABBR} & \best{69.68} & \best{82.39} & \best{78.02} & \best{68.81} & \best{73.29} & \gcmark \\
+        % Rebalanced-RSInternVL & 64.76 & 74.96 & 70.72 & 63.54 & 67.13 & 228 \\
+        \bottomrule
+        \end{tabular}
+    \label{tab:binary_results}
+\end{table}

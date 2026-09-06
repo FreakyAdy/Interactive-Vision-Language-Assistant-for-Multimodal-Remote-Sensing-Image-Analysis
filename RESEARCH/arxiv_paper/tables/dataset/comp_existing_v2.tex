@@ -1,0 +1,34 @@
+\begin{table*}[h!tb]
+    \centering
+    %\small
+    \renewcommand{\arraystretch}{\arrayStretchFactor}
+    \setlength\tabcolsep{1pt}
+    \caption{
+    Comparison of existing \ac{RS} image-text datasets. Datasets are compared in terms of: 1) the presence of co-registered multi-sensor imagery exceeding three spectral bands; 2) methods used for text annotation, including the presence of an extensive manual quality check (QC); 3) supported tasks; 4) availability of geolocation data and 5) the number of image-text (IT) samples. 
+    \rcmark{} indicates that only parts of the dataset fulfill this property.
+    }
+    \begin{tabular}{l >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.8cm} >{\centering\arraybackslash}p{0.5cm} c >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.5cm} c >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.5cm} >{\centering\arraybackslash}p{0.8cm} c r}
+    \toprule
+     \multirow{2}{*}{\makecell{\\[14pt]Dataset}}     & \multicolumn{3}{c}{\makecell{Multi-Sensor\\[-4pt]Images}} && \multicolumn{5}{c}{Annotation Method} && \multicolumn{3}{c}{\makecell{Supported\\[-4pt]Tasks}} & \multirow{2}{*}{\rb{Geolocation data\gap{8pt}}} & \multirow{2}{*}{\rb{\#IT samples\gap{7pt}}}\\
+     \cmidrule{2-4} \cmidrule{6-10} \cmidrule{12-14}
+                                                     & \multicolumn{1}{c}{\rb{Available}} & \multicolumn{1}{c}{\rb{\makecell{>3 bands\\[-4pt]per image}}} & \multicolumn{1}{c}{\rb{Co-registered}} && \multicolumn{1}{c}{\rb{Manual}} & \multicolumn{1}{c}{\rb{Template}} & \multicolumn{1}{c}{\rb{Web scraped}} & \multicolumn{1}{c}{\rb{LLM-based}} & \multicolumn{1}{c}{\rb{Manual QC}} && \multicolumn{1}{c}{\rb{Captioning}} & \multicolumn{1}{c}{\rb{VQA}} & \multicolumn{1}{c}{\rb{\makecell{Ref. Exp.\\[-4pt]Detection}}}\\
+\midrule
+                                                     % ms-avail  all-bands ms-paired   manual   template  web       llm       manual-qc  captioning vqa      det       loc      samples
+     UCM-Captions~\cite{qu2016deep}                  & \rxmark & \rxmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & \gcmark && \gcmark & \rxmark & \rxmark & \rxmark & 10.5k \\
+     Sydney-Captions~\cite{qu2016deep}               & \rxmark & \rxmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & \gcmark && \gcmark & \rxmark & \rxmark & \rxmark & 3k \\
+     RSICD~\cite{lu2017exploring}                    & \rxmark & \rxmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & \gcmark && \gcmark & \rxmark & \rxmark & \rxmark & 54.6k \\
+     RSITMD~\cite{yuan2022exploring}                 & \rxmark & \rxmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & \gcmark && \gcmark & \rxmark & \rxmark & \rxmark & 23.7k \\
+     NWPU-Captions~\cite{cheng2022nwpu}              & \gcmark & \rxmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & \gcmark && \gcmark & \rxmark & \rxmark & \rxmark & 157k \\
+     GAIA~\cite{gaia_zavras}                         & \gcmark & \rxmark & \rxmark && \rxmark & \rxmark & \gcmark & \gcmark & \rxmark && \gcmark & \rxmark & \rxmark & \rcmark & 205k \\
+     Git-10M~\cite{Text2Earth_git_10m}               & \gcmark & \rxmark & \rxmark && \rxmark & \rxmark & \rxmark & \gcmark & \rxmark && \gcmark & \rxmark & \rxmark & \gcmark & 10.5M \\
+     RSVQAxBEN~\cite{lobryRSVQAMeetsBigearthnet2021} & \rxmark & \rxmark & \rxmark && \rxmark & \gcmark & \rxmark & \rxmark & \rxmark && \rxmark & \gcmark & \rxmark & \rxmark & 14.8M \\
+     RS5M~\cite{zhang2024rs5m}                       & \gcmark & \rxmark & \rxmark && \rxmark & \rxmark & \rcmark & \rcmark & \rxmark && \gcmark & \rxmark & \rxmark & \rcmark & 5.0M \\
+     RSTeller~\cite{ge2025rsteller}                  & \rxmark & \rxmark & \rxmark && \rxmark & \rxmark & \rxmark & \gcmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & 2.6M \\
+     Landsat30-AU~\cite{ma2025landsat30}             & \rxmark & \rxmark & \rxmark && \rxmark & \rxmark & \rxmark & \gcmark & \rcmark && \gcmark & \gcmark & \rxmark & \rcmark & 216k \\
+     ChatEarthNet~\cite{ChatEarthNet}                & \rxmark & \gcmark & \rxmark && \rxmark & \rxmark & \rxmark & \gcmark & \rcmark && \gcmark & \rxmark & \rxmark & \rxmark & 173k \\
+     MS-Clip~\cite{marimo2025beyond}                 & \gcmark & \gcmark & \gcmark && \rxmark & \rxmark & \rxmark & \gcmark & \rxmark && \gcmark & \rxmark & \rxmark & \rxmark & 985k \\
+     \bentxt (ours)                                  & \gcmark & \gcmark & \gcmark && \rxmark & \gcmark & \rxmark & \gcmark & \rcmark && \gcmark & \gcmark & \gcmark & \gcmark & 9.6M \\
+    \bottomrule
+    \end{tabular}
+    \label{tab:existing_datasets_properties}
+\end{table*}
