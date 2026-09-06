@@ -99,6 +99,7 @@ class DemoScenario(BaseModel):
     talking_points: List[str] = Field(default_factory=list, description="Pitch talking points for judges")
 
 
+
 class HealthResponse(BaseModel):
     status: str = Field("healthy", description="Overall health status")
     version: str = Field("1.0.0", description="SatQuery AI API version")
@@ -108,3 +109,69 @@ class HealthResponse(BaseModel):
     model_loaded: str = Field(..., description="Primary VLM model identifier")
     supported_sensors: List[str] = Field(default_factory=list, description="List of calibrated ISRO sensors")
     uptime_seconds: float = Field(..., description="Server uptime in seconds")
+
+
+class AuditableExecutionSummary(BaseModel):
+    auditable_trace_version: str = Field("SIH26167-v1.0", description="Specification version")
+    selected_task: Dict[str, Any] = Field(..., description="Selected task classification & SIH ID")
+    input_compatibility: Dict[str, Any] = Field(..., description="Observable input validation & format verification")
+    orchestrated_models_and_tools: List[str] = Field(..., description="Registered models and tools executed")
+    configured_permitted_parameters: Dict[str, Any] = Field(..., description="Task-specific permitted parameters configured")
+    observable_outputs: Dict[str, Any] = Field(..., description="Textual and spatial deliverables")
+    confidence_metrics: Dict[str, float] = Field(..., description="Quantitative confidence scores")
+    total_execution_latency_ms: float = Field(..., description="Total execution time in ms")
+    compliance_status: str = Field("STRICT_SIH26167_COMPLIANT", description="Compliance status")
+
+
+class CompatibilityCheckResponse(BaseModel):
+    is_compatible: bool = Field(..., description="Whether input images meet scope requirements")
+    scope: str = Field(..., description="Detected scope: SINGLE_IMAGE, CROSS_MODAL_PAIR, BITEMPORAL_PAIR")
+    message: str = Field(..., description="Compatibility summary message")
+    errors: List[str] = Field(default_factory=list, description="Validation errors if any")
+    image_metas: List[Dict[str, Any]] = Field(default_factory=list, description="Metadata of inspected images")
+    auditable_compatibility_trace: Dict[str, Any] = Field(default_factory=dict, description="Observable trace")
+
+
+class CrossModalAnalysisRequest(BaseModel):
+    query: Optional[str] = Field(
+        "Use the optical and SAR images together to identify built-up and water-covered regions.",
+        description="Natural language instruction for cross-modal analysis"
+    )
+    sar_weight: float = Field(0.5, ge=0.0, le=1.0, description="Weight of SAR radar backscatter vs Optical [0, 1]")
+    cloud_suppression: bool = Field(True, description="Enable cloud shadow rejection using radar roughness")
+
+
+class CrossModalAnalysisResponse(BaseModel):
+    status: str = Field("ok", description="Status code")
+    input_scope: str = Field("CROSS_MODAL_PAIR", description="Verified input scope")
+    query: str = Field(..., description="Evaluated query")
+    metrics: Dict[str, Any] = Field(..., description="Water, built-up, and vegetation percentages")
+    confidence: float = Field(..., description="Multimodal fusion confidence [0, 1]")
+    confidence_label: str = Field("HIGH", description="Confidence label")
+    explanation: str = Field(..., description="Evidence-grounded explanation")
+    modality_synergy: Dict[str, Any] = Field(..., description="SAR vs Optical physical contributions")
+    annotated_image: Optional[str] = Field(None, description="Base64 encoded false-color composite")
+    auditable_summary: AuditableExecutionSummary = Field(..., description="Observable SIH execution trace")
+    total_processing_ms: float = Field(..., description="Turnaround time in ms")
+
+
+class CDVQARequest(BaseModel):
+    query: Optional[str] = Field(
+        "Has the built-up area increased, decreased, or remained unchanged?",
+        description="Temporal change question"
+    )
+    target_category: Optional[str] = Field("built_up", description="Category of interest: built_up, vegetation, water")
+
+
+class CDVQAResponse(BaseModel):
+    status: str = Field("ok", description="Status code")
+    input_scope: str = Field("BITEMPORAL_PAIR", description="Verified input scope")
+    query: str = Field(..., description="User question")
+    categorical_answer: str = Field(..., description="INCREASED, DECREASED, or UNCHANGED")
+    quantitative_delta: str = Field(..., description="Measured quantitative difference (e.g. +3.45 ha, +14.2%)")
+    explanation: str = Field(..., description="Evidence-grounded physical explanation")
+    confidence: float = Field(..., description="Bimodal confidence score [0, 1]")
+    annotated_image: Optional[str] = Field(None, description="Base64 difference visualization")
+    auditable_summary: AuditableExecutionSummary = Field(..., description="Observable SIH execution trace")
+    total_processing_ms: float = Field(..., description="Turnaround time in ms")
+

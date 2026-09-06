@@ -141,3 +141,55 @@ def test_api_latency_under_five_seconds():
     elapsed = time.time() - t0
     assert resp.status_code == 200
     assert elapsed < 5.0
+
+
+def test_compatibility_check_api():
+    b1 = _create_test_image_bytes()
+    resp = client.post(
+        "/api/compatibility-check",
+        files={"image1": ("optical.png", b1, "image/png")}
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["is_compatible"] is True
+    assert data["scope"] == "SINGLE_IMAGE"
+
+
+def test_cross_modal_analysis_api():
+    b_opt = _create_test_image_bytes(color=(100, 160, 80))
+    b_sar = _create_test_image_bytes(color=(120, 120, 120))
+    resp = client.post(
+        "/api/cross-modal-analysis",
+        files={
+            "optical_image": ("optical.png", b_opt, "image/png"),
+            "sar_image": ("sar.png", b_sar, "image/png"),
+        },
+        data={"query": "Use the optical and SAR images together to identify built-up and water-covered regions."}
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "ok"
+    assert data["input_scope"] == "CROSS_MODAL_PAIR"
+    assert "metrics" in data
+    assert "auditable_summary" in data
+    assert data["auditable_summary"]["compliance_status"] == "STRICT_SIH26167_COMPLIANT"
+
+
+def test_cdvqa_api():
+    b1 = _create_test_image_bytes(color=(110, 150, 90))
+    b2 = _create_test_image_bytes(color=(190, 190, 200))
+    resp = client.post(
+        "/api/cdvqa",
+        files={
+            "t1_image": ("t1.png", b1, "image/png"),
+            "t2_image": ("t2.png", b2, "image/png"),
+        },
+        data={"query": "Has the built-up area increased, decreased, or remained unchanged?"}
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["status"] == "ok"
+    assert data["input_scope"] == "BITEMPORAL_PAIR"
+    assert "categorical_answer" in data
+    assert "auditable_summary" in data
+

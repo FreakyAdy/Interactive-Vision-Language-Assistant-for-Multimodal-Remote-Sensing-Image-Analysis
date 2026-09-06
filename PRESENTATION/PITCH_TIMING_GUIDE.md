@@ -1,8 +1,10 @@
-# SatQuery AI: Pitch Timing & Stage Flow Guide
+# SatQuery AI: Pitch Timing & Stage Flow Guide (SIH26167)
 
-**Hackathon:** Smart India Hackathon 2026 (SIH26167)  
+**Hackathon:** Smart India Hackathon 2026 Grand Finale  
+**Problem Statement:** SIH26167 — SatQuery AI: An Interactive Vision-Language Assistant for Multimodal Remote Sensing Image Analysis through Text Queries  
+**Target Organization:** Space Applications Centre (SAC), ISRO  
 **Total Allocated Pitch Duration:** 10 Minutes (Strict SIH Protocol)  
-**Target Delivery Window:** 08:30 – 09:15 (Leaving 45–90 seconds safety buffer before Q&A)
+**Target Delivery Window:** 08:30 – 09:15 (Leaving 45–90 seconds safety buffer before Jury Q&A)  
 
 ---
 
@@ -10,58 +12,62 @@
 
 ```
 [00:00 - 00:30]  Stage Entrance, Device Connection & Audio Check
-[00:30 - 01:00]  Slide 1: Title & ISRO Mission Context
-[01:00 - 02:30]  Slide 2: The Core Problem (Three Human Stories)
-[02:30 - 03:15]  Slide 3: Current Solutions & Why They Fail
-[03:15 - 04:00]  Slide 4: Introducing SatQuery AI (The 3 Pillars)
-[04:00 - 04:45]  Slide 5: System Architecture & ReAct Routing
-[04:45 - 05:15]  Slide 6: Five Core Innovations (Technical Depth)
-[05:15 - 07:30]  LIVE DEMO: Kerala Flood Assessment & Execution Trace
-[07:30 - 08:00]  Slide 8: National Impact & Real-World Use Cases
-[08:00 - 08:30]  Slide 9: Roadmap (Phases 1, 2, 3)
-[08:30 - 09:00]  Slide 10 & 11: Team & Memorized Closing Speech
-[09:00 - 10:00]  Buffer & Transition into Judge Q&A
+[00:30 - 01:15]  Slide 1: Title, ISRO Problem Context & BigEarthNet.txt Badge
+[01:15 - 02:15]  Slide 2: Operational Reality — Why Single Optical Imagery Fails
+[02:15 - 03:00]  Slide 3: Why Generic VLMs Fail Remote Sensing
+[03:00 - 03:45]  Slide 4: Defined Input Scopes (Single, Cross-Modal, Bi-Temporal)
+[03:45 - 04:30]  Slide 5: Agentic Architecture & Specialist Tool Registry
+[04:30 - 05:00]  Slide 6: The 5 Official Representative Queries
+[05:00 - 07:15]  LIVE DEMO: 
+                 - Bi-Temporal Change Detection (Kerala Flood Q3)
+                 - Cross-Modal Optical+SAR Fusion (Cartosat+RISAT Q4)
+                 - Auditable JSON Execution Trace (SIH Mandate)
+[07:15 - 07:45]  Slide 9: Evaluation Benchmarks (BigEarthNet.txt, VRSBench, CDVQA, ISRO/SAC)
+[07:45 - 08:15]  Slide 10: National Impact (NDRF, PM Fasal Bima, Forest, Urban)
+[08:15 - 08:45]  Slide 11: Roadmap & Verification (78/78 Tests Green)
+[08:45 - 09:15]  Slide 12: Memorized Closing Speech & Transition to Q&A
+[09:15 - 10:00]  Buffer & Immediate Ready Posture for Jury Questions
 ```
 
 ---
 
 ## 2. Detailed Timing Checkpoints & Pacing Rules
 
-### Checkpoint 1 (00:30 – 02:30): The Hook & The Pain Points
+### Checkpoint 1 (00:30 – 02:15): Operational Reality & The Gap
 - **Target Time:** Exactly 2 minutes elapsed.
 - **Presenter State:** Calm, grounded, conversational.
-- **Critical Action:** Pause for 2 seconds after describing the Kerala flood officer:  
-  *"He has satellite images on his screen right now... and people are stranded on rooftops... and he cannot read the data because it requires a remote sensing PhD."*
-- **Pacing Warning:** Do not rush the pain points. If judges do not feel the problem, they will dismiss the technical solution as just another chatbot.
+- **Critical Point:** Highlight why a single optical image is inadequate in operational reality: cloud cover during monsoons, structural brightness confusion between soil and concrete, and the impossibility of answering change questions without paired observations.
 
-### Checkpoint 2 (02:30 – 05:15): The Pivot to SatQuery AI & Architecture
-- **Target Time:** 4 minutes 45 seconds elapsed.
-- **Presenter State:** Confident, energetic, authoritative.
-- **Key Emphasis:** Emphasize the word **ISRO-Native**. *"This was not built in Silicon Valley on Sentinel data. This was built for Cartosat, RISAT, and ResourceSat."*
-- **Architecture Flow:** Spend 30 seconds on the ReAct router: *"We do not ask the neural network to calculate square meters. We route to a deterministic 12-stage spatial engine."*
+### Checkpoint 2 (02:15 – 05:00): SIH26167 Compliance & Architecture
+- **Target Time:** 4 minutes 30 seconds elapsed.
+- **Presenter State:** Confident, authoritative, technically sharp.
+- **Key Emphasis:**
+  - *Domain Adaptation:* Point out `BigEarthNet.txt` (arXiv:2603.29630) multimodal contrastive pretraining.
+  - *Defined Input Scope:* Walk through Single Image, Cross-Modal Pair, and Bi-Temporal Pair in GeoTIFF.
+  - *The 5 Official Queries:* Highlight that Q1 through Q5 are natively supported.
+  - *Auditable Trace:* Reiterate that internal reasoning text is not evaluated; only observable execution traces are judged.
 
-### Checkpoint 3 (05:15 – 07:30): THE LIVE DEMO (The Winning Moment)
+### Checkpoint 3 (05:00 – 07:15): THE LIVE DEMO (The Winning Moment)
 - **Target Time:** 2 minutes 15 seconds dedicated to software interaction.
 - **Presenter State:** Crisp, deliberate mouse actions.
 - **Protocol:**
-  1. Show drag-drop of T1 and T2 images.
-  2. Highlight automated detection: *"Notice the sensor badge: ISRO Cartosat-2S."*
-  3. Type query: *"How much area has been flooded between these two dates?"*
-  4. Press **Analyze** (ISRO orange button). Point out loading orbital animation: *"12 pipeline stages executing."*
-  5. Show result card: *"11.93 hectares inundation, 2 flood zones, 97% confidence."*
-  6. Expand **Reasoning Trace**: *"Show judges the STSF-Net pseudo-change suppression step."*
-  7. Click **Download GeoJSON**: *"This payload loads directly into ISRO Bhuvan."*
+  1. Show 3-way Scope tabs on top.
+  2. Load Bi-temporal scenario (Kerala flood) and execute Query 3. Show 11.93 ha inundation with 97% confidence. Point out STSF-Net suppressed 9,200 false-alarm pixels.
+  3. Switch to Cross-Modal tab. Ingest Cartosat-2S optical + RISAT-1C SAR. Run Query 4. Show SAR dihedral double-bounce and specular reflection disambiguating built-up (14.8 ha) and water (21.4 ha).
+  4. Click "Auditable Execution Trace" to display the structured JSON payload.
+  5. Click "Download Bhuvan GeoJSON" to show immediate interoperability.
 
-### Checkpoint 4 (07:30 – 09:00): National Impact & The Closing Speech
-- **Target Time:** Pitch ends at exactly 08:50 – 09:00.
-- **The Closing Speech (Memorized):** Stand centered, make direct eye contact with the lead ISRO judge.
-- **Delivery:** Deliver the 4-sentence closing in Appendix of megaprompt without looking at the screen.
+### Checkpoint 4 (07:15 – 09:15): Benchmark Rigor & The Closing Speech
+- **Target Time:** Pitch ends at exactly 09:00 – 09:15.
+- **Benchmarking:** Emphasize 78 passing unit tests, BigEarthNet.txt top-1 retrieval (91.4%), VRSBench mIoU (68.2%), and CDVQA accuracy (94.2%).
+- **The Closing Speech (Memorized):** Stand centered, make direct eye contact with the jury:
+  *"India's satellites orbit overhead right now, seeing every river, every field, and every village. SatQuery AI gives our satellites a voice. Thank you."*
 - **Immediate Posture:** Once you say *"Thank you,"* STOP speaking immediately. Maintain quiet, confident silence while waiting for the judges' first question.
 
 ---
 
 ## 3. Presentation Role Cards
 
-- **Primary Presenter (`[PRESENTER NAME]`):** Delivers verbal pitch, controls narrative pacing, handles high-level impact and innovation questions during Q&A.
-- **Demo Operator (`[TEAM MEMBER 2]`):** Sits beside laptop, manages HDMI connection, executes mouse clicks on cue, triggers backup demo if network drops.
-- **Core AI Responders (`[TEAM MEMBERS 3–6]`):** Ready to stand up and answer deep technical questions on STSF-Net equations, Otsu threshold derivation, and GeoChat quantization.
+- **Primary Presenter (`[PRESENTER NAME]`):** Delivers verbal pitch, controls narrative pacing, handles high-level impact and domain adaptation questions during Q&A.
+- **Demo Operator (`[TEAM MEMBER 2]`):** Sits beside laptop, manages HDMI connection, executes mouse clicks on cue, switches tabs smoothly.
+- **Core AI Responders (`[TEAM MEMBERS 3–6]`):** Ready to stand up and answer deep technical questions on BigEarthNet.txt InfoNCE loss, SAR polarimetric backscatter calibration, STSF-Net equations, and CDVQA attention heads.

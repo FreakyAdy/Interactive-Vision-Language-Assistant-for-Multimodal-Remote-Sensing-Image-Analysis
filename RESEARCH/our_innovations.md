@@ -10,15 +10,16 @@ SatQuery AI departs fundamentally from existing remote sensing chatbots. Rather 
 
 ```
 ┌────────────────────────────────────────────────────────────────────────────────────────┐
-│                                SATQUERY AI FIVE INNOVATIONS                             │
+│                                SATQUERY AI SIX CORE INNOVATIONS                        │
 ├────────────────────────────────┬───────────────────────────────────────────────────────┤
 │ Innovation                     │ Core Technical Breakthrough                           │
 ├────────────────────────────────┼───────────────────────────────────────────────────────┤
 │ 1. ISRO Sensor Calibration     │ Native TOA radiance & SAR σ° radiometric conversion   │
-│ 2. Agentic ReAct Query Router  │ Intent classification & multi-tool orchestration      │
-│ 3. STSF-Net Pseudo-Suppression │ Local patch variance filtering of radiometric drift   │
-│ 4. Bimodal Confidence Metric   │ Tri-factor physics-grounded score (ω · v · p)         │
-│ 5. ISRO-Native GIS Integration │ Bhuvan/VEDAS-compliant GeoJSON & disaster reports     │
+│ 2. Agentic ReAct Query Router  │ Multi-scope routing with observable auditable trace   │
+│ 3. Optical-SAR Joint Fusion    │ Radar backscatter + Optical spectral disambiguation   │
+│ 4. STSF-Net Pseudo-Suppression │ Local patch variance filtering of radiometric drift   │
+│ 5. Bimodal Confidence Metric   │ Tri-factor physics-grounded score (ω · v · p)         │
+│ 6. ISRO-Native GIS Integration │ Bhuvan/VEDAS-compliant GeoJSON & disaster reports     │
 └────────────────────────────────┴───────────────────────────────────────────────────────┘
 ```
 
@@ -51,45 +52,63 @@ SatQuery AI incorporates a dedicated sensor calibration layer supporting five IS
 
 ---
 
-## Innovation 2: Agentic ReAct Query Router
+## Innovation 2: Agentic Query Router with Auditable Execution Summary
 
 ### The Problem
-Monolithic VLMs attempt to answer all questions through direct autoregressive next-token prediction. When asked *"How many hectares of forest were lost between October and December?"*, a VLM will hallucinate numbers because transformer attention mechanisms cannot perform exact geometric integration or image differencing in token space.
+Monolithic VLMs attempt to answer all questions through direct autoregressive next-token prediction without verifying whether input images are single, bi-temporal, or cross-modal pairs. When asked *"Has built-up area increased?"*, an unguided LLM guesses without computing true surface statistics. Furthermore, hackathon evaluators require an **observable, auditable execution trace** documenting which specialist tools and permitted parameters were invoked.
 
 ### The SatQuery Solution
-SatQuery AI implements a ReAct (Reasoning + Acting) Agentic Query Router. When a user submits an arbitrary natural language query, the router:
+SatQuery AI implements a ReAct (Reasoning + Acting) Agentic Controller that:
 
 ```
-                  User Query
-                      │
-                      ▼
-            [ Query Router ]
-          (Keyword + Embeddings)
-                      │
-     ┌────────────────┼────────────────┬────────────────┐
-     ▼                ▼                ▼                ▼
-[VLM Engine]   [Change Detector] [Spectral Engine] [Object Detector]
- (GeoChat-7B)   (12-Stage Pipeline) (NDVI/NDWI/EVI)  (DOTA YOLO/SAM)
-     │                │                │                │
-     └────────────────┴────────────────┴────────────────┘
+                  User Query + Input Imagery
                               │
                               ▼
-                   [ Report Generator ]
+                 [ Compatibility Checker ]
+           (Verifies Single, Cross-Modal, Bi-Temporal)
                               │
                               ▼
-            Natural Language Answer + GeoJSON + Trace
+                     [ ReAct Router ]
+               (Intent Classification & Planning)
+                              │
+     ┌────────────────┬───────┴────────┬────────────────┬────────────────┐
+     ▼                ▼                ▼                ▼                ▼
+[Single VQA/    [12-Stage Change  [Optical-SAR     [Spectral Index  [Object Detector
+ Grounding]      Engine & CDVQA]   Fusion Engine]   Analytics]       (DOTA BBoxes)]
+     │                │                │                │                │
+     └────────────────┴───────┬────────┴────────────────┴────────────────┘
+                              │
+                              ▼
+              [ Auditable Execution Trace Generator ]
+           (Selected Task, Tools, Permitted Params, Latency)
+                              │
+                              ▼
+            Grounded Answer + Vector Mask + JSON Summary Trace
 ```
 
-1. **Decomposes Query Intent:** Classifies the prompt across 6 discrete task categories:
-   - `scene_classification`
-   - `object_detection`
-   - `change_detection`
-   - `spectral_analysis`
-   - `area_measurement`
-   - `disaster_assessment`
-2. **Dispatches Deterministic Microservices:** Instead of asking the neural network to calculate area, the router invokes the 12-stage `ChangeDetector` or `SpectralEngine` to perform mathematically exact pixel-counting and coordinate projection.
-3. **Synthesizes Grounded Outputs:** The VLM receives the exact pre-computed measurements as contextual priors, guaranteeing zero mathematical hallucination.
-4. **Emits Full Execution Trace:** Displays each step, intermediate metric, algorithm name, and duration to the user, ensuring scientific transparency.
+1. **Classifies 6 Canonical Operational Scenarios:**
+   - `SINGLE_IMAGE_CAPTION_GROUNDING` (VRSBench-aligned land-cover captioning & text-guided grounding)
+   - `SINGLE_IMAGE_VQA` (RSVQA-aligned scene querying)
+   - `BITEMPORAL_CHANGE_ANALYSIS` (12-stage sequential change detection & spatial mapping)
+   - `BITEMPORAL_CDVQA` (Change-VQA directional questions: increased, decreased, unchanged)
+   - `CROSS_MODAL_FUSION` (Joint Optical-SAR complementary information extraction)
+   - `SPECTRAL_ANALYTICS` (Quantitative NDVI/NDWI/NDBI/EVI/RVI extraction)
+2. **Strict Parameter Sandboxing:** Configures only permitted task parameters (e.g. `sar_weight`, `stsf_suppression_active`, `otsu_margin`), preventing dangerous out-of-bounds execution.
+3. **Auditable Trace Compliance:** Every request returns an observable JSON payload capturing selected task, input verification, executed tool names, parameters, confidence metrics, and latency, strictly satisfying the SIH26167 evaluation requirement.
+
+---
+
+## Innovation 3: Optical-SAR Cross-Modal Joint Information Extraction
+
+### The Problem
+Monsoonal cloud cover renders optical imagery useless across coastal India during cyclone and flood emergencies. Furthermore, cloud shadows create dark optical patches that standard models misclassify as flooded rivers.
+
+### The SatQuery Solution
+SatQuery AI implements a dedicated `OpticalSARFusionEngine` combining co-registered Cartosat-2S optical and RISAT C-band SAR observations:
+- **Radar Specular Physics:** Open water surfaces scatter radar pulses away from the antenna, creating low backscatter ($\sigma^\circ < -18\text{ dB}$). Optical NDWI and SAR specular attenuation combine to confirm true water bodies.
+- **Double-Bounce Infrastructure Identification:** Orthogonal building structures generate high radar double-bounce reflections, enabling cloud-penetrating built-up detection.
+- **Cloud Shadow Elimination:** Dark optical patches that exhibit normal ground roughness in SAR are immediately rejected as cloud shadows, suppressing false-alarm flood alerts.
+
 
 ---
 

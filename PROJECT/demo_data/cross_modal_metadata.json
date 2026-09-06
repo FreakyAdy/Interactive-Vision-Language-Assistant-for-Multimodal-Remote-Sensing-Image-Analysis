@@ -1,0 +1,10 @@
+{
+  "scenario": "ISRO SAC Benchmark: Co-registered Cartosat-2S Optical + RISAT C-band SAR",
+  "optical_sensor": "Cartosat-2S (0.65m VNIR)",
+  "sar_sensor": "RISAT-1C (C-band, 5.35 GHz, FRS-1)",
+  "features": {
+    "water_body": "Specular radar reflection + Optical NDWI agreement",
+    "urban_settlement": "Double-bounce radar corner reflection + Optical context",
+    "cloud_shadow_mitigation": "SAR penetrates optical cloud shadow eliminating false positive water detections"
+  }
+}

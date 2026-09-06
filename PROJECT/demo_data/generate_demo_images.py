@@ -303,6 +303,68 @@ def generate_single_samples(size: int = 512) -> None:
     save_image(harbor, OUTPUT_DIR / "harbor_sample.tif")
 
 
+def generate_cross_modal_scenario(size: int = 512) -> None:
+    """
+    Generates a co-registered Optical + SAR benchmark pair mimicking ISRO
+    Cartosat-2S optical (0.65m) and RISAT C-band SAR (3m) observations.
+
+    Demonstrates:
+    - Optical cloud shadow (dark in optical) disambiguated by SAR (normal roughness)
+    - Open water: dark in both optical (NDWI > 0.4) and SAR (specular reflection)
+    - Built-up structures: high NDBI in optical + strong double-bounce in SAR
+    """
+    logger.info("Generating co-registered Cartosat-2S Optical + RISAT SAR pair...")
+    rng = np.random.default_rng(777)
+    yy, xx = np.mgrid[:size, :size]
+
+    # 1. Optical Scene: Land cover + water body + localized cloud & shadow
+    optical = np.zeros((size, size, 3), dtype=np.uint8)
+    optical[:, :] = [110, 165, 85]  # Mixed vegetation baseline
+
+    # River / Reservoir (water)
+    water_mask = (np.abs(yy - (0.4 * size + 0.1 * size * np.sin(xx / 50.0))) < 35)
+    optical[water_mask] = [30, 80, 160]
+
+    # Urban settlement (grid)
+    urban_mask = (xx > 0.6 * size) & (yy < 0.4 * size)
+    optical[urban_mask] = [190, 185, 180]
+
+    # Cloud shadow artifact (darkens optical, but NOT water!)
+    cloud_shadow = (np.abs(xx - 0.25 * size) < 40) & (np.abs(yy - 0.75 * size) < 35)
+    optical[cloud_shadow] = (optical[cloud_shadow] * 0.35).astype(np.uint8)
+
+    save_image(optical, OUTPUT_DIR / "cartosat_optical_sample.tif", bounds=(76.2, 10.1, 76.4, 10.3))
+
+    # 2. Co-registered SAR Scene (C-band microwave radar)
+    sar = np.zeros((size, size), dtype=np.uint8)
+    sar[:, :] = rng.integers(70, 110, size=(size, size), dtype=np.uint8)  # Normal rough terrain speckle
+
+    # Water: Specular microwave reflection -> Extremely low backscatter (dark)
+    sar[water_mask] = rng.integers(5, 25, size=np.sum(water_mask), dtype=np.uint8)
+
+    # Built-up: Dihedral corner reflection -> Very high backscatter (bright)
+    sar[urban_mask] = rng.integers(210, 255, size=np.sum(urban_mask), dtype=np.uint8)
+
+    # Crucial physical check: Cloud shadow does NOT attenuate microwave radar!
+    # Normal terrain speckle remains in sar[cloud_shadow] (no dark anomaly in SAR!)
+
+    save_image(sar, OUTPUT_DIR / "risat_sar_sample.tif", bounds=(76.2, 10.1, 76.4, 10.3))
+
+    # Save metadata
+    meta = {
+        "scenario": "ISRO SAC Benchmark: Co-registered Cartosat-2S Optical + RISAT C-band SAR",
+        "optical_sensor": "Cartosat-2S (0.65m VNIR)",
+        "sar_sensor": "RISAT-1C (C-band, 5.35 GHz, FRS-1)",
+        "features": {
+            "water_body": "Specular radar reflection + Optical NDWI agreement",
+            "urban_settlement": "Double-bounce radar corner reflection + Optical context",
+            "cloud_shadow_mitigation": "SAR penetrates optical cloud shadow eliminating false positive water detections"
+        }
+    }
+    with open(OUTPUT_DIR / "cross_modal_metadata.json", "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2)
+
+
 def generate_all():
     """Builds complete suite of demo data files."""
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
@@ -310,8 +372,10 @@ def generate_all():
     generate_deforestation_scenario()
     generate_urban_scenario()
     generate_single_samples()
+    generate_cross_modal_scenario()
     logger.info("All demo data generation complete! Files located in: %s", OUTPUT_DIR)
 
 
 if __name__ == "__main__":
     generate_all()
+

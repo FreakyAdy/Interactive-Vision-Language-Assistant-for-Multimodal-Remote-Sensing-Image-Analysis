@@ -49,44 +49,55 @@ RemoteCLIP reformulated OpenAI's CLIP for remote sensing by constructing a large
 - **LHRS-Bot** (Muhtar et al., ECCV 2024) integrated Volunteered Geographic Information (VGI) from OpenStreetMap into the visual conditioning pipeline, enhancing geographic entity naming.
 - **VHM** (Pang et al., AAAI 2025) directly tackled the phenomenon of "hallucination in Earth observation," introducing honesty calibration loss functions that penalize ungrounded assertions when imagery possesses cloud occlusion or insufficient spatial resolution.
 
+### 1.6 Remote-Sensing Domain Adaptation: BigEarthNet.txt (arXiv:2603.29630)
+A major bottleneck in adapting general VLMs to Earth observation is the lack of paired multimodal pre-training archives encompassing both optical multispectral and SAR modalities alongside rich descriptive text. As mandated in ISRO SIH26167:
+- **BigEarthNet.txt** establishes the primary benchmark archive uniting co-registered Sentinel-1 C-band SAR dual-pol (VV/VH) and Sentinel-2 12-band multispectral observations with multi-label textual captions.
+- It enables contrastive feature alignment (InfoNCE) across microwave dielectric backscatter and optical surface reflectance, solving the modality gap that previously crippled single-modality foundation models.
+
+### 1.7 Evaluation Benchmarks: VRSBench, RSVQA, and CDVQA
+To quantitatively measure multimodal vision-language performance without bias:
+1. **VRSBench** (Vision-Language Remote Sensing Benchmark): Evaluates high-resolution single-image captioning (CIDEr, BLEU-4, ROUGE-L), visual question answering, and text-guided region grounding (mIoU, Precision@0.5).
+2. **RSVQA**: The de-facto standard for evaluating satellite VQA across diverse question archetypes (presence, object counting, area extent, and comparative relations).
+3. **CDVQA** (Change Detection Visual Question Answering): The benchmark dedicated to evaluating multitemporal reasoning over bi-temporal pairs, testing whether models can deduce categorical directional changes (*"Has built-up area increased, decreased, or remained unchanged?"*) and spatial deltas.
+
 ---
 
-## 2. Remote Sensing Change Detection Methods
+## 2. Remote Sensing Change Detection & Cross-Modal Optical-SAR Fusion
 
 Bi-temporal change detection involves comparing geographically coincident images acquired at timestamps $T_1$ and $T_2$ to identify significant land-use and land-cover (LULC) transformations.
 
 ```
-Raw T1, T2 Images
+Raw T1, T2 Images                        Co-Registered Optical + SAR Pair
+       │                                                 │
+       ▼                                                 ▼
+[ Co-registration (SIFT/RANSAC) ]            [ Optical-SAR Joint Fusion ]
+       │                                                 │
+       ▼                                                 ▼
+[ Radiometric Normalization ]               Optical: NDWI (Water), NDVI (Veg)
+       │                                    SAR: Specular (Water), Double-Bounce (Urban)
+       ▼                                                 │
+[ Spectral Difference: Δ = |I_T2 - I_T1| ]               ▼
+       │                                    [ Cloud Shadow Disambiguation ]
+       ▼                                    (SAR penetrates clouds; ignores shadows)
+[ STSF-Net Pseudo-Change Suppression ]                   │
+       │                                                 ▼
+       ▼                                    [ Grounded Multimodal Vector Output ]
+[ Otsu Dynamic Thresholding ]
        │
        ▼
-[ Co-registration ] ──► Sub-pixel spatial alignment
+[ Morphological Cleaning & Connected Components ]
        │
        ▼
-[ Relative Radiometric Normalization ] ──► Histogram matching / dark object subtraction
-       │
-       ▼
-[ Spectral Difference Formulation ] ──► Δ = |Index(T2) - Index(T1)|
-       │
-       ▼
-[ Pseudo-Change Suppression (STSF-Net) ] ──► Local variance σ vs mean diff μ_Δ
-       │
-       ▼
-[ Automatic Thresholding (Otsu) ] ──► Maximizing inter-class variance σ_B²
-       │
-       ▼
-[ Morphological Spatial Cleaning ] ──► Opening (de-noise) + Closing (hole fill)
-       │
-       ▼
-[ Region Quantification & Confidence ] ──► Connected components + Bimodal scoring
+[ Bimodal Confidence Scoring ]
 ```
 
-### 2.1 Traditional vs. Deep Learning Methods
-- **Algebraic Differencing & CVA:** Change Vector Analysis (CVA) and direct image differencing remain computationally efficient but are highly susceptible to seasonal illumination disparities, atmospheric haze, and soil moisture shifts, resulting in elevated false alarm rates.
-- **Siamese Networks:** Architectures such as FC-Siam-diff, STANet, and BIT (Bitemporal Image Transformer) map $T_1$ and $T_2$ through twin encoders, computing difference tokens via self-attention. While effective on benchmark benchmarks (LEVIR-CD, WHU-CD), they require massive paired training sets and lack zero-shot adaptability to unmodeled sensor curves.
-- **STSF-Net (Spatio-Temporal Spectral Fusion Network):** Introduces adaptive spatial-context filtering to suppress "pseudo-changes" (phenological changes in vegetation canopy, minor solar elevation differences, soil moisture variations). By inspecting local neighborhood variance $\sigma_{T1}, \sigma_{T2}$ relative to the mean signed shift $\mu_\Delta$, true structural transitions are separated from radiometric drift.
-
-### 2.2 VLM-Based Change Detection
-Recent models like **ChangeChat** and **TEOChat** (2024) feed dual images directly into a transformer encoder. While capable of generating qualitative text summaries (*"new buildings appeared"*), they lack deterministic area quantification in metric units (hectares, square kilometers) and fail to emit boundary-compliant GeoJSON shapes required for Geographic Information Systems (GIS).
+### 2.1 Optical-SAR Cross-Modal Fusion Physics
+Many critical operational questions cannot be solved with a single optical image due to cloud cover, monsoonal storms, and solar illumination shadows.
+- **Optical VNIR Sensors (e.g. Cartosat-2S, ResourceSat-2A):** Deliver rich spectral reflection and contextual color. However, cloud cover causes complete data loss, while cloud shadows mimic dark water bodies, triggering false-positive flood alarms.
+- **SAR Microwave Sensors (e.g. RISAT-1C, EOS-04):** Operating at C-band (5.35 GHz) and L-band (1.27 GHz), radar waves penetrate clouds, rain, and atmospheric smoke day and night.
+  * *Water Detection:* Open water surfaces mirror radar pulses away from the antenna (specular scattering), returning near-zero backscatter ($\sigma^\circ < -18\text{ dB}$).
+  * *Built-Up Infrastructure:* Orthogonal building walls and paved roads create dihedral corner reflectors (double-bounce scattering), returning intense backscatter.
+  * *Cross-Modal Synergism:* When an optical image displays a dark patch, SAR immediately confirms whether it is a real water body (low backscatter) or merely an optical cloud shadow (normal soil/vegetation roughness).
 
 ---
 
@@ -118,17 +129,19 @@ India operates one of the world's largest civilian Earth observation satellite c
 
 ## 4. Research Gaps Addressed by SatQuery AI
 
-A comprehensive synthesis of the literature reveals five fundamental research gaps:
+A comprehensive synthesis of the literature reveals six fundamental research gaps directly resolved by SatQuery AI:
 
 | Research Gap | Current State of the Art | SatQuery AI Solution |
 |---|---|---|
 | **Gap 1: ISRO Sensor Calibration** | Existing VLMs process images as generic 8-bit RGB without sensor-specific calibration. | Native calibration modules for Cartosat, RISAT, and ResourceSat converting DN to Top-of-Atmosphere (TOA) radiance and $\sigma^\circ$ backscatter. |
-| **Gap 2: Agentic Tool Orchestration** | Foundation models operate as monolithic end-to-end black boxes, prone to calculation errors. | ReAct-style agentic query routing that dispatches tasks to deterministic scientific engines (NDVI, NDWI, SAM, Otsu). |
-| **Gap 3: Pseudo-Change Suppression** | Naive differencing flags illumination and seasonal changes as true land-cover changes. | STSF-Net-inspired patch variance filtering suppressing false-positive radiometric drift by >35%. |
-| **Gap 4: Scientific Confidence Scoring** | Standard models report uncalibrated token softmax probabilities that do not reflect spatial quality. | Tri-factor bimodal histogram confidence scoring ($\omega, v, p$) providing physically grounded reliability metrics. |
-| **Gap 5: Operational GIS Output** | VLMs output plain text only; cannot be consumed by spatial decision-makers. | Automated GeoJSON polygon generation and structured disaster reports formatted for ISRO Bhuvan and VEDAS platforms. |
+| **Gap 2: Agentic Tool Orchestration** | Foundation models operate as monolithic end-to-end black boxes, prone to calculation errors. | ReAct-style agentic query routing that dispatches tasks to deterministic scientific engines (NDVI, NDWI, SAM, Otsu, Optical-SAR). Emits an auditable JSON execution trace. |
+| **Gap 3: Optical-SAR Complementary Fusion** | Single-image VLMs are crippled by cloud cover and optical shadows. | Joint multimodal fusion pairing Cartosat optical with RISAT C-band SAR backscatter for 100% all-weather disambiguation. |
+| **Gap 4: Pseudo-Change Suppression** | Naive differencing flags illumination and seasonal changes as true land-cover changes. | STSF-Net-inspired patch variance filtering suppressing false-positive radiometric drift by >35%. |
+| **Gap 5: Scientific Confidence Scoring** | Standard models report uncalibrated token softmax probabilities that do not reflect spatial quality. | Tri-factor bimodal histogram confidence scoring ($\omega, v, p$) providing physically grounded reliability metrics. |
+| **Gap 6: Operational GIS Output** | VLMs output plain text only; cannot be consumed by spatial decision-makers. | Automated GeoJSON polygon generation and structured disaster reports formatted for ISRO Bhuvan and VEDAS platforms. |
 
 ---
 
 ## 5. Conclusion
-While vision-language foundation models have achieved remarkable qualitative progress, their practical deployment within national remote sensing agencies requires rigorous radiometric calibration, agentic tool dispatching, deterministic change quantification, and standardized GIS outputs. **SatQuery AI** directly bridges these foundational research gaps, providing India with a dependable, transparent, and sensor-native spatial assistant.
+While vision-language foundation models have achieved remarkable qualitative progress, their practical deployment within national remote sensing agencies requires rigorous radiometric calibration, agentic tool dispatching, deterministic change quantification, optical-SAR cross-modal fusion, and standardized GIS outputs. **SatQuery AI** directly bridges these foundational research gaps, providing India with a dependable, transparent, and sensor-native spatial assistant.
+
