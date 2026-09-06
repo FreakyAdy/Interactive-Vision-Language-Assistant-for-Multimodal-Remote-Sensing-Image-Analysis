@@ -68,7 +68,7 @@
   <rect x="760" y="110" width="200" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
   <text x="860" y="135" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
   <text x="860" y="153" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
-  <text x="860" y="169" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &bull; Bimodal Metric (ω, v, p)</text>
+  <text x="860" y="169" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
 
   <!-- Tool 2: Spectral Engine -->
   <rect x="760" y="215" width="200" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
@@ -80,13 +80,13 @@
   <rect x="760" y="320" width="200" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
   <text x="860" y="345" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
   <text x="860" y="363" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
-  <text x="860" y="379" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &bull; Forest &bull; Urban Polygons</text>
+  <text x="860" y="379" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
 
   <!-- Tool 4: Object Detector -->
   <rect x="760" y="425" width="200" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
   <text x="860" y="450" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
   <text x="860" y="468" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
-  <text x="860" y="484" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &bull; Tanks &bull; Vehicles</text>
+  <text x="860" y="484" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
 
   <!-- SENSOR CALIBRATION MODULE -->
   <rect x="440" y="450" width="160" height="110" rx="10" fill="#1E202A" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="4,4"/>
@@ -111,7 +111,7 @@
 
   <rect x="480" y="570" width="260" height="80" rx="10" fill="#0F172A" stroke="#FF6B00" stroke-width="2"/>
   <text x="610" y="600" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FF6B00" text-anchor="middle">Operational Disaster Report</text>
-  <text x="610" y="620" font-family="'Inter', sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Quantitative Area Metrics &bull; Actions</text>
+  <text x="610" y="620" font-family="'Inter', sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Quantitative Area Metrics &#8226; Actions</text>
   <text x="610" y="635" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Full 12-Stage Verifiable Audit Trace</text>
 
   <!-- ARROWS & CONNECTORS -->

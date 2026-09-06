@@ -12,7 +12,7 @@
   <rect x="0" y="0" width="1000" height="60" fill="#0E1E38" stroke="#1E293B" stroke-width="1"/>
   <circle cx="45" cy="30" r="14" fill="#FF6B00"/>
   <text x="70" y="36" font-family="'Inter', sans-serif" font-size="18" font-weight="bold" fill="#FFFFFF">SatQuery <tspan fill="#FF6B00">AI</tspan></text>
-  <text x="210" y="35" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8">| SIH26167 &bull; Space Applications Centre, ISRO</text>
+  <text x="210" y="35" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8">| SIH26167 &#8226; Space Applications Centre, ISRO</text>
 
   <!-- Right Header Badges -->
   <rect x="760" y="18" width="100" height="24" rx="12" fill="rgba(0,212,170,0.15)" stroke="#00D4AA" stroke-width="1"/>
@@ -29,11 +29,11 @@
   <!-- Dropzone 1 -->
   <rect x="50" y="130" width="410" height="90" rx="8" fill="#091322" stroke="#38BDF8" stroke-width="1.5" stroke-dasharray="4,4"/>
   <text x="255" y="170" font-family="'Inter', sans-serif" font-size="12" fill="#CBD5E1" text-anchor="middle">📁 Drag &amp; Drop Primary Satellite Image</text>
-  <text x="255" y="190" font-family="'Inter', sans-serif" font-size="10" fill="#64748B" text-anchor="middle">GeoTIFF, PNG, JPEG &bull; Up to 50MB</text>
+  <text x="255" y="190" font-family="'Inter', sans-serif" font-size="10" fill="#64748B" text-anchor="middle">GeoTIFF, PNG, JPEG &#8226; Up to 50MB</text>
 
   <!-- Sensor Badge & Compare Toggle -->
   <rect x="50" y="230" width="180" height="26" rx="13" fill="rgba(56,189,248,0.15)" stroke="#38BDF8" stroke-width="1"/>
-  <text x="140" y="247" font-family="'Inter', sans-serif" font-size="10.5" font-weight="600" fill="#38BDF8" text-anchor="middle">ISRO Cartosat-2S &bull; 2.1m</text>
+  <text x="140" y="247" font-family="'Inter', sans-serif" font-size="10.5" font-weight="600" fill="#38BDF8" text-anchor="middle">ISRO Cartosat-2S &#8226; 2.1m</text>
 
   <rect x="250" y="230" width="210" height="26" rx="13" fill="#1E293B"/>
   <text x="355" y="247" font-family="'Inter', sans-serif" font-size="10.5" fill="#FFFFFF" text-anchor="middle">✔ Compare Two Images (Active)</text>

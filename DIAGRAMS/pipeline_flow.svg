@@ -13,7 +13,7 @@
 
   <!-- Title -->
   <text x="325" y="40" font-family="'Inter', sans-serif" font-size="20" font-weight="bold" fill="#FFFFFF" text-anchor="middle">12-Stage Change Detection Pipeline</text>
-  <text x="325" y="62" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8" text-anchor="middle">SatQuery AI &bull; ISRO Bi-Temporal Processing Engine</text>
+  <text x="325" y="62" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8" text-anchor="middle">SatQuery AI &#8226; ISRO Bi-Temporal Processing Engine</text>
 
   <!-- STAGE 0 -->
   <g transform="translate(75, 85)">
@@ -71,7 +71,7 @@
     <rect width="36" height="52" rx="8" fill="#FF6B00"/>
     <text x="18" y="32" font-family="'Inter', sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">06</text>
     <text x="50" y="24" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF">Stage 5: Signed &amp; Absolute Difference Maps</text>
-    <text x="50" y="42" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Δ_signed = T2 - T1 &bull; Δ_abs = |T2 - T1| preserves change direction (~2.4 ms)</text>
+    <text x="50" y="42" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">Δ_signed = T2 - T1 &#8226; Δ_abs = |T2 - T1| preserves change direction (~2.4 ms)</text>
   </g>
   <line x1="325" y1="487" x2="325" y2="502" stroke="#94A3B8" stroke-width="2" marker-end="url(#arr)"/>
 
@@ -131,7 +131,7 @@
     <rect width="36" height="56" rx="8" fill="#00D4AA"/>
     <text x="18" y="34" font-family="'Inter', sans-serif" font-size="14" font-weight="bold" fill="#0B1628" text-anchor="middle">12</text>
     <text x="50" y="25" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#00D4AA">Stage 11: Bimodal Histogram Confidence Scoring</text>
-    <text x="50" y="44" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF">Computes physical confidence: C = ω &bull; v &bull; p ➔ HIGH/MEDIUM/LOW (~2.8 ms)</text>
+    <text x="50" y="44" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF">Computes physical confidence: C = ω &#8226; v &#8226; p ➔ HIGH/MEDIUM/LOW (~2.8 ms)</text>
   </g>
 
   <!-- Output Footer -->
