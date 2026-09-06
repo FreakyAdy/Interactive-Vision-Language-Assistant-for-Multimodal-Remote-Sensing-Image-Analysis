@@ -166,10 +166,13 @@ class ChangeDetector:
         """Append an execution trace entry."""
         entry = TraceEntry(stage, name, tool, observation, duration_ms, why)
         self._trace.append(entry)
-        logger.info(
-            "[Stage %02d] %s  (%.1f ms) — %s",
-            stage, name, duration_ms, observation,
-        )
+        try:
+            logger.info(
+                "[Stage %02d] %s  (%.1f ms) - %s",
+                stage, name, duration_ms, observation,
+            )
+        except Exception:
+            pass
 
     @staticmethod
     def _timer() -> float:
@@ -503,7 +506,7 @@ class ChangeDetector:
         cleaned = binary_closing(cleaned, selem)
         if np.sum(cleaned) == 0 and np.sum(binary) > 0:
             cleaned = binary
-        obs = f"Morph cleaning (r={radius}): {np.sum(binary)} → {np.sum(cleaned)} pixels"
+        obs = f"Morph cleaning (r={radius}): {np.sum(binary)} -> {np.sum(cleaned)} pixels"
         self._record(9, "Morphological Cleaning", "MorphOps", obs,
                       (self._timer() - start) * 1000,
                       "Remove isolated noise pixels and fill small holes")
@@ -549,7 +552,7 @@ class ChangeDetector:
         """Stage 11 — Confidence Scoring.
 
         Bimodal histogram separation score combining:
-        - ω: Otsu inter-class variance ratio (higher = better separation)
+        - omega: Otsu inter-class variance ratio (higher = better separation)
         - v: valley-to-peak depth ratio
         - p: area imbalance penalty
 
@@ -570,7 +573,7 @@ class ChangeDetector:
                           "Score bimodal histogram separation")
             return 0.0, "LOW"
 
-        # ω — inter-class variance ratio
+        # omega — inter-class variance ratio
         below = flat[flat <= threshold]
         above = flat[flat > threshold]
         if below.size == 0 or above.size == 0:
@@ -612,7 +615,7 @@ class ChangeDetector:
         else:
             label = "LOW"
 
-        obs = f"ω={omega:.3f}, v={v:.3f}, p={p:.3f} → confidence={confidence:.3f} ({label})"
+        obs = f"omega={omega:.3f}, v={v:.3f}, p={p:.3f} -> confidence={confidence:.3f} ({label})"
         self._record(11, "Confidence Scoring", "BimodalScorer", obs,
                       (self._timer() - start) * 1000,
                       "Score bimodal histogram separation for reliability")

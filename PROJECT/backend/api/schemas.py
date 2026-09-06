@@ -16,12 +16,16 @@ from pydantic import BaseModel, Field
 
 
 class ExecutionTraceStep(BaseModel):
-    stage: int = Field(..., description="Stage sequence index")
+    stage: int = Field(1, description="Stage sequence index")
     name: str = Field(..., description="Stage name")
     tool: str = Field(..., description="Underlying algorithm or tool")
     observation: str = Field(..., description="Output observation or intermediate metric")
     duration_ms: float = Field(..., description="Execution time in milliseconds")
-    why: str = Field(..., description="Scientific or operational rationale")
+    why: str = Field("", description="Scientific or operational rationale")
+    step: Optional[int] = Field(None, description="Step sequence index")
+    task: Optional[str] = Field(None, description="Task name")
+    parameters: Optional[Dict[str, Any]] = Field(None, description="Tool parameters")
+    output: Optional[str] = Field(None, description="Output description")
 
 
 class AreaMetrics(BaseModel):

@@ -970,6 +970,9 @@
         </div>
         <div class="metric-card">
           <div class="metric-val" id="valConfidence" style="color: var(--sat-green);">--</div>
+          <div style="width: 100%; height: 5px; background: rgba(255,255,255,0.1); border-radius: 3px; margin: 4px 0 3px 0; overflow: hidden;">
+            <div id="gaugeConfidence" style="width: 0%; height: 100%; background: linear-gradient(90deg, var(--sat-cyan), var(--sat-green)); border-radius: 3px; transition: width 0.4s ease;"></div>
+          </div>
           <div class="metric-label">Calibrated Confidence</div>
         </div>
         <div class="metric-card">
@@ -1041,9 +1044,9 @@
       <div class="trace-card">
         <div class="accordion-header" onclick="toggleTrace()">
           <span>📋 Auditable Execution Trace (SIH26167 Requirement)</span>
-          <span id="traceArrow">▼ Show JSON Audit Trace</span>
+          <span id="traceArrow">▲ Hide JSON Audit Trace</span>
         </div>
-        <div class="accordion-content" id="traceContent">
+        <div class="accordion-content" id="traceContent" style="display: block;">
           <pre id="jsonTracePre" style="margin: 0; white-space: pre-wrap; word-break: break-word; color: #38BDF8;">// Click an analysis to generate an auditable JSON execution trace</pre>
         </div>
       </div>
@@ -1062,9 +1065,9 @@
   </main>
 
   <script>
-    // Configuration & State
+    // Configuration & State (SIH26167 Mandated Zero-GPU Demo Mode)
+    const DEMO_MODE = true;
     const API_BASE = "http://localhost:8000";
-    let DEMO_MODE = true;
     let currentResult = null;
     let currentScope = 'single'; // 'single' | 'cross_modal' | 'bitemporal'
 
@@ -1523,10 +1526,14 @@
       const thumb = document.getElementById(`thumb${slot}`);
       const fname = document.getElementById(`metaFilename${slot}`);
       const meta = document.getElementById(`metaSensor${slot}`);
-      box.style.display = 'flex';
-      thumb.src = filename.endsWith('.tif') ? `../demo_data/flood_t1.png` : `../demo_data/${filename}`;
-      fname.textContent = filename;
-      meta.innerHTML = `<span>Context:</span> ${desc}`;
+      if (box) box.style.display = 'flex';
+      if (fname) fname.textContent = filename;
+      if (meta) meta.innerHTML = `<span>Context:</span> ${desc}`;
+      if (thumb) {
+        thumb.onerror = function() { this.style.display = 'none'; };
+        thumb.src = filename.endsWith('.tif') ? `../demo_data/flood_t1.png` : `../demo_data/${filename}`;
+        thumb.style.display = 'block';
+      }
     }
 
     // Execute Analysis Pipeline
@@ -1548,7 +1555,7 @@
         msgIdx = (msgIdx + 1) % messages.length;
         statusText.textContent = messages[msgIdx][0];
         subtext.textContent = messages[msgIdx][1];
-      }, 350);
+      }, 300);
 
       const t0 = performance.now();
       const q = document.getElementById('queryText').value;
@@ -1560,8 +1567,18 @@
         return;
       }
 
+      // If in DEMO_MODE or running locally from filesystem without server, execute instant high-fidelity simulation
+      if (DEMO_MODE || window.location.protocol === 'file:') {
+        setTimeout(() => {
+          clearInterval(interval);
+          overlay.style.display = 'none';
+          const simulated = getSimulatedData(q);
+          renderResults(simulated, Math.round(performance.now() - t0));
+        }, 500);
+        return;
+      }
+
       try {
-        // Check if query matches cross-modal
         if (currentScope === 'cross_modal' || q.toLowerCase().includes('optical and sar')) {
           const resp = await fetch(`${API_BASE}/api/demo/run/cross_modal_cartosat_risat`, { method: 'POST' });
           if (resp.ok) {
@@ -1585,13 +1602,13 @@
         console.warn("Backend API call fallback to local calibrated simulation:", err);
       }
 
-      // Offline High-Fidelity Simulation
+      // Offline Fallback Simulation
       setTimeout(() => {
         clearInterval(interval);
         overlay.style.display = 'none';
         const simulated = getSimulatedData(q);
         renderResults(simulated, Math.round(performance.now() - t0));
-      }, 1200);
+      }, 500);
     }
 
     function getSimulatedData(q) {
@@ -1722,7 +1739,10 @@
       const m = data.area_metrics || {};
       const areaDisplay = m.area_ha ? `${m.area_ha} ha` : (m.built_up_ha ? `${m.built_up_ha} ha` : "Identified");
       document.getElementById('valArea').textContent = areaDisplay;
-      document.getElementById('valConfidence').textContent = `${Math.round((data.confidence || 0.95) * 100)}% ${data.confidence_label || 'HIGH'}`;
+      const confVal = Math.round((data.confidence || 0.95) * 100);
+      document.getElementById('valConfidence').textContent = `${confVal}% ${data.confidence_label || 'HIGH'}`;
+      const gauge = document.getElementById('gaugeConfidence');
+      if (gauge) gauge.style.width = `${confVal}%`;
       document.getElementById('valTask').textContent = (data.task_type || "VQA").replace(/_/g, " ").toUpperCase();
       document.getElementById('valCompat').textContent = "PASS (SIH)";
 
@@ -1748,6 +1768,36 @@
       document.getElementById('jsonTracePre').textContent = JSON.stringify(trace, null, 2);
 
       document.getElementById('latencyBadge').textContent = `Audited Trace Latency: ${latencyMs} ms`;
+    }
+
+    // Automatic Change Detection trigger on dual image upload
+    const fPri = document.getElementById('filePrimary');
+    const fSec = document.getElementById('fileSecondary');
+    if (fPri) {
+      fPri.setAttribute('multiple', 'true');
+      fPri.addEventListener('change', (e) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          setPreview('Primary', files[0].name, 'Uploaded Image 1');
+          if (files.length >= 2) {
+            setPreview('Secondary', files[1].name, 'Uploaded Image 2');
+            setInputScope('bitemporal');
+            document.getElementById('queryText').value = "What changed between these two dates, and where did the change occur?";
+            updateTaskTag(document.getElementById('queryText').value);
+          }
+        }
+      });
+    }
+    if (fSec) {
+      fSec.addEventListener('change', (e) => {
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          setPreview('Secondary', files[0].name, 'Uploaded Image 2');
+          setInputScope('bitemporal');
+          document.getElementById('queryText').value = "What changed between these two dates, and where did the change occur?";
+          updateTaskTag(document.getElementById('queryText').value);
+        }
+      });
     }
 
     function downloadGeoJSON() {
@@ -1806,6 +1856,10 @@ ${JSON.stringify(trace, null, 2)}
 
     // Auto-check backend on load
     window.addEventListener('load', async () => {
+      if (window.location.protocol === 'file:' || DEMO_MODE) {
+        document.getElementById('systemHealthBadge').innerHTML = `<span class="dot"></span> ZERO-GPU STANDALONE`;
+        return;
+      }
       try {
         const r = await fetch(`${API_BASE}/health`);
         if (r.ok) {

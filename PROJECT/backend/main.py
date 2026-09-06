@@ -41,11 +41,11 @@ logging.basicConfig(
 logger = logging.getLogger("satquery.main")
 
 BANNER = r"""
-╔══════════════════════════════════════════════════════════════════════════════╗
-║  🛰️  SatQuery AI — ISRO Remote Sensing Vision-Language Assistant            ║
-║      Smart India Hackathon 2026 | Problem Statement: SIH26167               ║
-║      Space Applications Centre (SAC), Ahmedabad                             ║
-╚══════════════════════════════════════════════════════════════════════════════╝
+================================================================================
+   SatQuery AI — ISRO Remote Sensing Vision-Language Assistant
+   Smart India Hackathon 2026 | Problem Statement: SIH26167
+   Space Applications Centre (SAC), Ahmedabad
+================================================================================
 """
 
 
@@ -53,11 +53,14 @@ BANNER = r"""
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Startup and shutdown lifecycle context."""
     # Startup
-    print(BANNER)
+    try:
+        print(BANNER)
+    except Exception:
+        print(BANNER.encode("ascii", errors="replace").decode("ascii"))
     demo_mode = getattr(settings, "DEMO_MODE", True)
     mode_str = "DEMO (Zero-GPU Canned Inference)" if demo_mode else "PRODUCTION (CUDA GeoChat-7B)"
     logger.info("=" * 60)
-    logger.info("🛰️ SatQuery AI is ready | ISRO SIH26167 | Mode: %s", mode_str)
+    logger.info("SatQuery AI is ready | ISRO SIH26167 | Mode: %s", mode_str)
     logger.info("Calibrated sensors: Cartosat-2S/3, RISAT-1C, ResourceSat-2A, EOS-04/05")
     logger.info("API Documentation available at: http://localhost:8000/docs")
     logger.info("=" * 60)

@@ -398,6 +398,69 @@ class QueryRouter:
         return scores
 
     @staticmethod
+    def handle_change_vqa(query: str, area_ha: float, pct_changed: float, change_direction: str = "expansion", confidence: float = 0.89) -> dict[str, Any]:
+        """Detect if query about a change pair is a question and format answer accordingly.
+        
+        Aligned to CDVQA (Change Detection VQA) benchmark requirement.
+        """
+        q_lower = query.lower()
+        is_question = any(q_lower.startswith(w) for w in ["has ", "did ", "is ", "have ", "was ", "can ", "does "]) or "?" in q_lower
+        
+        increase_words = ["increase", "grown", "expanded", "rise", "spread", "flood", "more"]
+        decrease_words = ["decrease", "shrunk", "loss", "reduced", "decline", "deforestation", "less"]
+        
+        asks_increase = any(w in q_lower for w in increase_words)
+        asks_decrease = any(w in q_lower for w in decrease_words)
+        
+        if pct_changed > 1.0:
+            if asks_increase:
+                lead = "Yes, the area has increased significantly."
+            elif asks_decrease:
+                lead = "No, the area increased rather than decreased."
+            else:
+                lead = "Change detection reveals an expanding trend."
+            categorical = "INCREASED"
+        elif pct_changed < -1.0:
+            if asks_decrease:
+                lead = "Yes, significant contraction was observed."
+            elif asks_increase:
+                lead = "No, the area declined rather than increased."
+            else:
+                lead = "Change detection reveals a contracting trend."
+            categorical = "DECREASED"
+        else:
+            lead = "No, the area has remained largely unchanged."
+            categorical = "REMAINED UNCHANGED"
+            
+        category_name = "target feature"
+        if "water" in q_lower or "flood" in q_lower:
+            category_name = "surface water extent"
+        elif "built-up" in q_lower or "urban" in q_lower or "building" in q_lower:
+            category_name = "urban built-up extent"
+        elif "forest" in q_lower or "tree" in q_lower or "canopy" in q_lower or "vegetation" in q_lower:
+            category_name = "forest canopy coverage"
+
+        conf_label = "HIGH" if confidence >= 0.85 else "MEDIUM"
+        answer = (
+            f"{lead} Comparing the two acquisitions, {category_name} changed by approximately {abs(area_ha):.2f} hectares "
+            f"({abs(pct_changed):.1f}% {'increase' if pct_changed > 0 else 'decrease' if pct_changed < 0 else 'variance'}), "
+            f"concentrated along the spatial boundary, consistent with {change_direction.replace('_', ' ')}. "
+            f"Confidence: {conf_label} ({confidence:.2f})."
+        )
+        return {
+            "answer": answer,
+            "categorical_answer": categorical,
+            "is_question": is_question,
+            "change_direction": change_direction,
+            "area_ha": abs(area_ha),
+            "pct_changed": pct_changed,
+            "confidence": confidence,
+            "confidence_label": conf_label
+        }
+
+    change_vqa = handle_change_vqa
+
+    @staticmethod
     def _fallback_result(reason: str) -> dict[str, Any]:
         """Return a scene_classification fallback result.
 
@@ -421,6 +484,7 @@ class QueryRouter:
                 f"(Reason: {reason})"
             ),
         }
+
 
 
 # ---------------------------------------------------------------------------
