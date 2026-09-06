@@ -1,0 +1,296 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 800" width="1100" height="800">
+  <defs>
+    <!-- Background Gradients -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070E1A"/>
+      <stop offset="50%" stop-color="#0B1628"/>
+      <stop offset="100%" stop-color="#040810"/>
+    </linearGradient>
+
+    <!-- Slice Gradients -->
+    <linearGradient id="disasterGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8"/>
+      <stop offset="100%" stop-color="#0284C7"/>
+    </linearGradient>
+    <linearGradient id="agriGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00F0C0"/>
+      <stop offset="100%" stop-color="#00A884"/>
+    </linearGradient>
+    <linearGradient id="defenseGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF8C33"/>
+      <stop offset="100%" stop-color="#E05D00"/>
+    </linearGradient>
+    <linearGradient id="urbanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C084FC"/>
+      <stop offset="100%" stop-color="#7E22CE"/>
+    </linearGradient>
+    <linearGradient id="forestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047"/>
+      <stop offset="100%" stop-color="#D97706"/>
+    </linearGradient>
+
+    <linearGradient id="cardBg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#13223A"/>
+      <stop offset="100%" stop-color="#0C1728"/>
+    </linearGradient>
+
+    <!-- Filters -->
+    <filter id="shadowCard" x="-10%" y="-10%" width="120%" height="125%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="glowCenter" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="12" flood-color="#00D4AA" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+
+  <!-- Deep Cosmic Background -->
+  <rect width="1100" height="800" fill="url(#bgGrad)"/>
+
+  <!-- Subtle Blueprint Grid Lines -->
+  <g opacity="0.04" stroke="#FFFFFF" stroke-width="1">
+    <line x1="0" y1="120" x2="1100" y2="120"/>
+    <line x1="0" y1="240" x2="1100" y2="240"/>
+    <line x1="0" y1="360" x2="1100" y2="360"/>
+    <line x1="0" y1="480" x2="1100" y2="480"/>
+    <line x1="0" y1="600" x2="1100" y2="600"/>
+    <line x1="0" y1="720" x2="1100" y2="720"/>
+    <line x1="120" y1="0" x2="120" y2="800"/>
+    <line x1="360" y1="0" x2="360" y2="800"/>
+    <line x1="560" y1="0" x2="560" y2="800"/>
+    <line x1="840" y1="0" x2="840" y2="800"/>
+  </g>
+
+  <!-- Top Title Header Banner -->
+  <g transform="translate(50, 40)">
+    <rect x="0" y="-8" width="46" height="46" rx="8" fill="url(#agriGrad)" filter="url(#glowCenter)"/>
+    <text x="23" y="22" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#070E1A" text-anchor="middle">📊</text>
+
+    <text x="60" y="8" font-family="'Inter', sans-serif" font-size="11" font-weight="800" fill="#00D4AA" letter-spacing="2.5">ISRO / SAC SIH26167 • QUANTITATIVE IMPACT ANALYSIS</text>
+    <text x="60" y="32" font-family="'Inter', sans-serif" font-size="22" font-weight="900" fill="#FFFFFF" letter-spacing="0.5">Socio-Economic Impact &amp; Domain Benefit Distribution</text>
+
+    <!-- Top Right Status Badges -->
+    <g transform="translate(710, -2)">
+      <rect x="0" y="0" width="150" height="26" rx="13" fill="#0C2D22" stroke="#00D4AA" stroke-width="1.2"/>
+      <text x="75" y="17" font-family="'Inter', sans-serif" font-size="10.5" font-weight="800" fill="#00D4AA" text-anchor="middle">₹1,200+ CR ANNUAL ROI</text>
+
+      <rect x="160" y="0" width="130" height="26" rx="13" fill="#1B1736" stroke="#C084FC" stroke-width="1.2"/>
+      <text x="225" y="17" font-family="'Inter', sans-serif" font-size="10.5" font-weight="800" fill="#C084FC" text-anchor="middle">5 CORE SECTORS</text>
+    </g>
+  </g>
+
+  <!-- ==================== TOP 4 KEY PERFORMANCE INDICATORS ==================== -->
+  <g transform="translate(50, 110)">
+    <!-- KPI 1 -->
+    <g transform="translate(0, 0)">
+      <rect width="235" height="68" rx="10" fill="url(#cardBg)" stroke="#1B3352" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="12" y="12" width="4" height="44" rx="2" fill="#38BDF8"/>
+      <text x="26" y="28" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1">ANNUAL FISCAL BENEFIT</text>
+      <text x="26" y="52" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#38BDF8">₹1,200+ Cr</text>
+    </g>
+
+    <!-- KPI 2 -->
+    <g transform="translate(255, 0)">
+      <rect width="235" height="68" rx="10" fill="url(#cardBg)" stroke="#124233" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="12" y="12" width="4" height="44" rx="2" fill="#00D4AA"/>
+      <text x="26" y="28" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1">REAL DATA GROUNDING</text>
+      <text x="26" y="52" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#00D4AA">9.55M Triplets</text>
+    </g>
+
+    <!-- KPI 3 -->
+    <g transform="translate(510, 0)">
+      <rect width="235" height="68" rx="10" fill="url(#cardBg)" stroke="#4D2605" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="12" y="12" width="4" height="44" rx="2" fill="#FF6B00"/>
+      <text x="26" y="28" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1">DECISION SPEED</text>
+      <text x="26" y="52" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#FF6B00">&lt; 300 ms</text>
+    </g>
+
+    <!-- KPI 4 -->
+    <g transform="translate(765, 0)">
+      <rect width="235" height="68" rx="10" fill="url(#cardBg)" stroke="#3F1B66" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="12" y="12" width="4" height="44" rx="2" fill="#A855F7"/>
+      <text x="26" y="28" font-family="'Inter', sans-serif" font-size="10" font-weight="700" fill="#94A3B8" letter-spacing="1">COMPUTE EFFICIENCY</text>
+      <text x="26" y="52" font-family="'JetBrains Mono', monospace" font-size="20" font-weight="800" fill="#A855F7">99.4% Cut (LoRA)</text>
+    </g>
+  </g>
+
+  <!-- ==================== LEFT: DONUT PIE CHART ==================== -->
+  <g transform="translate(50, 200)">
+    <!-- Container Card -->
+    <rect width="420" height="505" rx="12" fill="url(#cardBg)" stroke="#1E3A5F" stroke-width="1.5" filter="url(#shadowCard)"/>
+    
+    <text x="210" y="36" font-family="'Inter', sans-serif" font-size="15" font-weight="800" fill="#FFFFFF" text-anchor="middle">Sectoral Value Distribution</text>
+    <text x="210" y="54" font-family="'Inter', sans-serif" font-size="11.5" fill="#94A3B8" text-anchor="middle">Weighted percentage of operational economic impact</text>
+
+    <!-- Donut Segments centered at cx=210, cy=245 -->
+    <g transform="translate(-40, -195)">
+      <!-- SLICE 1: Disaster Management (35%) -> Cyan -->
+      <path d="M 252.7 285.0 A 155 155 0 0 1 377.0 528.9 L 319.6 488.8 A 85 85 0 0 0 251.5 355.0 Z" fill="url(#disasterGrad)"/>
+
+      <!-- SLICE 2: Agriculture (25%) -> Emerald Green -->
+      <path d="M 373.8 533.3 A 155 155 0 0 1 161.1 567.0 L 201.2 509.6 A 85 85 0 0 0 317.9 491.2 Z" fill="url(#agriGrad)"/>
+
+      <!-- SLICE 3: Defense & Borders (15%) -> Orange -->
+      <path d="M 156.7 563.8 A 155 155 0 0 1 95.0 442.7 L 165.0 441.5 A 85 85 0 0 0 198.8 507.9 Z" fill="url(#defenseGrad)"/>
+
+      <!-- SLICE 4: Urban Governance (15%) -> Purple -->
+      <path d="M 95.0 437.3 A 155 155 0 0 1 156.7 316.2 L 198.8 372.1 A 85 85 0 0 0 165.0 438.5 Z" fill="url(#urbanGrad)"/>
+
+      <!-- SLICE 5: Forestry & Ecology (10%) -> Gold -->
+      <path d="M 161.1 313.0 A 155 155 0 0 1 247.3 285.0 L 248.5 355.0 A 85 85 0 0 0 201.2 370.4 Z" fill="url(#forestGrad)"/>
+
+      <!-- Center Hole Circle & Glow -->
+      <circle cx="250" cy="440" r="76" fill="#0A1626" stroke="#1E3A5F" stroke-width="2"/>
+      
+      <text x="250" y="426" font-family="'Inter', sans-serif" font-size="10" font-weight="800" fill="#94A3B8" text-anchor="middle" letter-spacing="1.5">NATIONAL VALUE</text>
+      <text x="250" y="452" font-family="'JetBrains Mono', monospace" font-size="22" font-weight="900" fill="#00D4AA" text-anchor="middle">₹1,200 Cr+</text>
+      <text x="250" y="470" font-family="'Inter', sans-serif" font-size="9.5" font-weight="700" fill="#38BDF8" text-anchor="middle">Annual Economic ROI</text>
+    </g>
+
+    <!-- Mini Bottom Legend Pills -->
+    <g transform="translate(20, 420)">
+      <!-- Row 1 -->
+      <g transform="translate(0, 0)">
+        <circle cx="8" cy="8" r="5" fill="#38BDF8"/>
+        <text x="18" y="12" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E2E8F0">Disaster: 35%</text>
+      </g>
+      <g transform="translate(130, 0)">
+        <circle cx="8" cy="8" r="5" fill="#00D4AA"/>
+        <text x="18" y="12" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E2E8F0">Agriculture: 25%</text>
+      </g>
+      <g transform="translate(265, 0)">
+        <circle cx="8" cy="8" r="5" fill="#FF6B00"/>
+        <text x="18" y="12" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E2E8F0">Defense: 15%</text>
+      </g>
+
+      <!-- Row 2 -->
+      <g transform="translate(45, 30)">
+        <circle cx="8" cy="8" r="5" fill="#A855F7"/>
+        <text x="18" y="12" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E2E8F0">Smart Cities: 15%</text>
+      </g>
+      <g transform="translate(200, 30)">
+        <circle cx="8" cy="8" r="5" fill="#FBBF24"/>
+        <text x="18" y="12" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#E2E8F0">Forestry: 10%</text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== RIGHT: 5 DETAILED SECTOR BENEFIT CARDS ==================== -->
+  <g transform="translate(490, 200)">
+    <!-- Card 1: Disaster Management (35%) -->
+    <g transform="translate(0, 0)">
+      <rect width="560" height="92" rx="10" fill="url(#cardBg)" stroke="#1B3352" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="0" y="0" width="6" height="92" rx="3" fill="#38BDF8"/>
+      
+      <g transform="translate(20, 22)">
+        <rect x="0" y="-8" width="46" height="22" rx="4" fill="#0E2A47"/>
+        <text x="23" y="7" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#38BDF8" text-anchor="middle">35%</text>
+        <text x="56" y="8" font-family="'Inter', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF">Disaster Management &amp; Flood Response</text>
+        <rect x="390" y="-8" width="135" height="22" rx="11" fill="#0E2A47" stroke="#38BDF8" stroke-width="0.8"/>
+        <text x="457" y="6" font-family="'Inter', sans-serif" font-size="9.5" font-weight="800" fill="#38BDF8" text-anchor="middle">₹420 CR VALUE / YR</text>
+
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11.5" fill="#CBD5E1">
+          • All-weather 100% cloud-penetrating SAR flood inundation mapping in under 5 minutes.
+        </text>
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          • Immediate evacuation route corridors; slashes NDRF/SDRF response time from 12h to 15m.
+        </text>
+      </g>
+    </g>
+
+    <!-- Card 2: Agriculture & PMFBY (25%) -->
+    <g transform="translate(0, 103)">
+      <rect width="560" height="92" rx="10" fill="url(#cardBg)" stroke="#124233" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="0" y="0" width="6" height="92" rx="3" fill="#00D4AA"/>
+      
+      <g transform="translate(20, 22)">
+        <rect x="0" y="-8" width="46" height="22" rx="4" fill="#0A2A20"/>
+        <text x="23" y="7" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#00D4AA" text-anchor="middle">25%</text>
+        <text x="56" y="8" font-family="'Inter', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF">Agriculture &amp; PM Fasal Bima Insurance</text>
+        <rect x="390" y="-8" width="135" height="22" rx="11" fill="#0A2A20" stroke="#00D4AA" stroke-width="0.8"/>
+        <text x="457" y="6" font-family="'Inter', sans-serif" font-size="9.5" font-weight="800" fill="#00D4AA" text-anchor="middle">₹300 CR VALUE / YR</text>
+
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11.5" fill="#CBD5E1">
+          • Accelerates crop loss claims from 180 days down to 48 hours via field NDVI/NDWI anomaly.
+        </text>
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          • Eliminates spurious crop claims; automated drought and inundation stress validation.
+        </text>
+      </g>
+    </g>
+
+    <!-- Card 3: Defense & Border Surveillance (15%) -->
+    <g transform="translate(0, 206)">
+      <rect width="560" height="92" rx="10" fill="url(#cardBg)" stroke="#4D2605" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="0" y="0" width="6" height="92" rx="3" fill="#FF6B00"/>
+      
+      <g transform="translate(20, 22)">
+        <rect x="0" y="-8" width="46" height="22" rx="4" fill="#331804"/>
+        <text x="23" y="7" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#FF6B00" text-anchor="middle">15%</text>
+        <text x="56" y="8" font-family="'Inter', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF">Border Defense &amp; Maritime Surveillance</text>
+        <rect x="390" y="-8" width="135" height="22" rx="11" fill="#331804" stroke="#FF6B00" stroke-width="0.8"/>
+        <text x="457" y="6" font-family="'Inter', sans-serif" font-size="9.5" font-weight="800" fill="#FF6B00" text-anchor="middle">₹240 CR VALUE / YR</text>
+
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11.5" fill="#CBD5E1">
+          • 24/7 all-weather change detection along strategic LAC/LOC borders &amp; maritime EEZ zones.
+        </text>
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          • Instant identification of newly constructed roads, helipads, radar posts, and dark ships.
+        </text>
+      </g>
+    </g>
+
+    <!-- Card 4: Urban Governance & Water Bodies (15%) -->
+    <g transform="translate(0, 309)">
+      <rect width="560" height="92" rx="10" fill="url(#cardBg)" stroke="#3F1B66" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="0" y="0" width="6" height="92" rx="3" fill="#A855F7"/>
+      
+      <g transform="translate(20, 22)">
+        <rect x="0" y="-8" width="46" height="22" rx="4" fill="#25103E"/>
+        <text x="23" y="7" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#C084FC" text-anchor="middle">15%</text>
+        <text x="56" y="8" font-family="'Inter', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF">Urban Governance &amp; Lake Conservation</text>
+        <rect x="390" y="-8" width="135" height="22" rx="11" fill="#25103E" stroke="#C084FC" stroke-width="0.8"/>
+        <text x="457" y="6" font-family="'Inter', sans-serif" font-size="9.5" font-weight="800" fill="#C084FC" text-anchor="middle">₹140 CR VALUE / YR</text>
+
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11.5" fill="#CBD5E1">
+          • Automated detection of illegal encroachment into lake buffer zones &amp; natural drainage paths.
+        </text>
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          • Verifiable GeoJSON outputs directly integrated into Municipal Master Plan enforcement.
+        </text>
+      </g>
+    </g>
+
+    <!-- Card 5: Forestry & Ecological Preservation (10%) -->
+    <g transform="translate(0, 412)">
+      <rect width="560" height="92" rx="10" fill="url(#cardBg)" stroke="#4A3B05" stroke-width="1.2" filter="url(#shadowCard)"/>
+      <rect x="0" y="0" width="6" height="92" rx="3" fill="#FBBF24"/>
+      
+      <g transform="translate(20, 22)">
+        <rect x="0" y="-8" width="46" height="22" rx="4" fill="#2E2304"/>
+        <text x="23" y="7" font-family="'JetBrains Mono', monospace" font-size="12" font-weight="800" fill="#FBBF24" text-anchor="middle">10%</text>
+        <text x="56" y="8" font-family="'Inter', sans-serif" font-size="14.5" font-weight="800" fill="#FFFFFF">Forestry, Wildlife &amp; Ecological Reserves</text>
+        <rect x="390" y="-8" width="135" height="22" rx="11" fill="#2E2304" stroke="#FBBF24" stroke-width="0.8"/>
+        <text x="457" y="6" font-family="'Inter', sans-serif" font-size="9.5" font-weight="800" fill="#FBBF24" text-anchor="middle">₹100 CR VALUE / YR</text>
+
+        <text x="0" y="34" font-family="'Inter', sans-serif" font-size="11.5" fill="#CBD5E1">
+          • Real-time deforestation alerts and illegal logging patch tracking across sensitive reserves.
+        </text>
+        <text x="0" y="52" font-family="'Inter', sans-serif" font-size="11" fill="#94A3B8">
+          • Wildfire burn perimeter mapping and post-fire canopy regeneration tracking.
+        </text>
+      </g>
+    </g>
+  </g>
+
+  <!-- ==================== BOTTOM FOOTER STRIP ==================== -->
+  <g transform="translate(50, 722)">
+    <rect width="1000" height="50" rx="10" fill="#0A182B" stroke="#25436E" stroke-width="1.2" filter="url(#shadowCard)"/>
+    <g transform="translate(25, 30)">
+      <circle cx="0" cy="0" r="10" fill="#38BDF8"/>
+      <text x="0" y="4" font-family="'Inter', sans-serif" font-size="12" font-weight="900" fill="#070E1A" text-anchor="middle">★</text>
+      <text x="25" y="-3" font-family="'Inter', sans-serif" font-size="13" font-weight="800" fill="#FFFFFF">STRATEGIC NATIONAL IMPACT:</text>
+      <text x="250" y="-3" font-family="'Inter', sans-serif" font-size="12.5" fill="#94A3B8">Transforms passive terabytes of ISRO Earth Observation data into real-time, actionable field intelligence.</text>
+      <text x="25" y="14" font-family="'Inter', sans-serif" font-size="11" font-weight="700" fill="#38BDF8">ESTIMATED 5-YEAR CUMULATIVE VALUE SURPASSES ₹6,000 CRORE FOR INDIA</text>
+    </g>
+  </g>
+</svg>
