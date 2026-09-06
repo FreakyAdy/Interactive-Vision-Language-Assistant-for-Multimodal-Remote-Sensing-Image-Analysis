@@ -30,7 +30,7 @@ from typing import Any
 import numpy as np
 from scipy import ndimage
 from skimage.filters import threshold_otsu
-from skimage.morphology import binary_opening, binary_closing, disk
+from skimage.morphology import opening as binary_opening, closing as binary_closing, disk
 
 from backend.core.spectral_indices import (
     auto_select_index,
@@ -103,6 +103,18 @@ class ChangeResult:
 
     def __getitem__(self, key: str) -> Any:
         return self.to_dict()[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.to_dict()
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        setattr(self, key, value)
+
+    def __iter__(self):
+        return iter(self.to_dict())
+
+    def get(self, key: str, default: Any = None) -> Any:
+        return self.to_dict().get(key, default)
 
 
 # ┌──────────────────────────────────────────────────────────────────────────┐
@@ -248,19 +260,15 @@ class ChangeDetector:
 
     @staticmethod
     def _histogram_match(source: np.ndarray, reference: np.ndarray) -> np.ndarray:
-        """Match the histogram of *source* to *reference*.
-
-        Args:
-            source: Array to transform.
-            reference: Target histogram array.
-
-        Returns:
-            Transformed source array.
-        """
+        """Match the histogram of *source* to *reference*."""
+        if np.std(reference) < 1e-3 or np.std(source) < 1e-3:
+            return source
         src_vals, src_idx, src_counts = np.unique(
             source.ravel(), return_inverse=True, return_counts=True,
         )
         ref_vals, ref_counts = np.unique(reference.ravel(), return_counts=True)
+        if len(ref_vals) < 10:
+            return source
 
         src_cdf = np.cumsum(src_counts).astype(np.float64)
         src_cdf /= src_cdf[-1]
@@ -478,10 +486,13 @@ class ChangeDetector:
             Cleaned binary mask.
         """
         start = self._timer()
-        selem = disk(self.morph_radius)
+        radius = min(self.morph_radius, max(1, min(binary.shape[:2]) // 32))
+        selem = disk(radius)
         cleaned = binary_opening(binary, selem)
         cleaned = binary_closing(cleaned, selem)
-        obs = f"Morph cleaning (r={self.morph_radius}): {np.sum(binary)} → {np.sum(cleaned)} pixels"
+        if np.sum(cleaned) == 0 and np.sum(binary) > 0:
+            cleaned = binary
+        obs = f"Morph cleaning (r={radius}): {np.sum(binary)} → {np.sum(cleaned)} pixels"
         self._record(9, "Morphological Cleaning", "MorphOps", obs,
                       (self._timer() - start) * 1000,
                       "Remove isolated noise pixels and fill small holes")
@@ -817,7 +828,7 @@ def suppress_pseudo_change(
 ) -> tuple[np.ndarray, int]:
     """Module-level helper to execute STSF-Net pseudo change suppression."""
     detector = ChangeDetector(patch_size=window_size)
-    return detector._stage6_pseudo_suppression(diff, t1, t2)
+    return detector._stage6_pseudo_change_suppression(diff, t1, t2)
 
 
 def otsu_threshold(diff: np.ndarray) -> float:

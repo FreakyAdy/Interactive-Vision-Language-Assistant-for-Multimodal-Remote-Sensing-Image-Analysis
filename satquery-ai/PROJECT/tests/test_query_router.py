@@ -20,7 +20,7 @@ def test_route_scene_classification(router: QueryRouter):
 def test_route_object_detection(router: QueryRouter):
     res = router.route("Count the number of ships and boats in the harbor")
     assert res["task_type"] == "object_detection"
-    assert "object_detector" in str(res["pipeline_steps"]).lower()
+    assert "object_detect" in str(res["pipeline_steps"]).lower()
 
 
 def test_route_change_detection(router: QueryRouter):

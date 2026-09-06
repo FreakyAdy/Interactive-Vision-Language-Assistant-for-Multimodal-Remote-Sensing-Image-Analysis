@@ -452,9 +452,10 @@ async def run_demo_scenario(scenario_id: str) -> Dict[str, Any]:
             query=matched.example_query,
             sensor_type=matched.sensor.lower(),
         )
-        results["scenario"] = matched.dict()
-        results["annotated_image"] = _encode_image_b64(t2)
-        return results
+        payload = results.to_dict() if hasattr(results, "to_dict") else dict(results)
+        payload["scenario"] = matched.model_dump()
+        payload["annotated_image"] = _encode_image_b64(t2)
+        return payload
     else:
         # Single image run
         img = np.ones((512, 512, 3), dtype=np.uint8) * 110
@@ -464,7 +465,7 @@ async def run_demo_scenario(scenario_id: str) -> Dict[str, Any]:
             query=matched.example_query,
             sensor_metadata={"sensor_type": matched.sensor},
         )
-        res["scenario"] = matched.dict()
+        res["scenario"] = matched.model_dump()
         res["annotated_image"] = _encode_image_b64(img)
         res["task_type"] = "scene_classification"
         res["sensor_badge"] = f"ISRO {matched.sensor}"

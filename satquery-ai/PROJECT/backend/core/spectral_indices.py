@@ -292,7 +292,7 @@ def compute_rvi(
     sigma_vh = sigma_vh.astype(np.float64)
     sigma_vv = sigma_vv.astype(np.float64)
 
-    rvi = _safe_divide(4.0 * sigma_vh, sigma_vv + sigma_vh)
+    rvi = np.clip(_safe_divide(4.0 * sigma_vh, sigma_vv + sigma_vh), 0.0, 1.0)
     stats = _compute_stats(rvi)
     interpretation = interpret_index_value("rvi", stats["mean"])
 
@@ -421,10 +421,10 @@ def auto_select_index(query: str, sensor_type: str = "optical") -> str:
     query_lower = query.lower()
     is_sar = sensor_type.lower() in ("sar", "risat-1c", "eos-04", "risat", "eos04")
 
-    # Score each index by counting keyword hits
+    # Score each index by counting keyword hits (substring matching for plural/gerund forms)
     scores: dict[str, int] = {}
     for index_name, keywords in _QUERY_INDEX_KEYWORDS.items():
-        score = sum(1 for kw in keywords if re.search(rf"\b{re.escape(kw)}\b", query_lower))
+        score = sum(1 for kw in keywords if kw in query_lower)
         scores[index_name] = score
 
     best = max(scores, key=lambda k: scores[k])
