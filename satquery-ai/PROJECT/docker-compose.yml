@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: satquery-backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DEMO_MODE=true
+      - HOST=0.0.0.0
+      - PORT=8000
+    volumes:
+      - ./demo_data:/app/demo_data:ro
+    networks:
+      - satquery-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 15s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: satquery-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    networks:
+      - satquery-network
+
+networks:
+  satquery-network:
+    driver: bridge
