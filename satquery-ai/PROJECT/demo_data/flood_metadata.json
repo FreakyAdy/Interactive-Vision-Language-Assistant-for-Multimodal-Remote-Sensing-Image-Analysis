@@ -1,0 +1,21 @@
+{
+  "scenario": "Kerala Floods 2023",
+  "sensor": "Cartosat-2S",
+  "resolution_m": 2.0,
+  "coordinates": {
+    "lat": 10.15,
+    "lon": 76.25,
+    "region": "Periyar River Basin, Kerala"
+  },
+  "t1_timestamp": "2023-10-10T04:45:00Z",
+  "t2_timestamp": "2023-10-12T04:50:00Z",
+  "primary_index": "ndwi",
+  "ground_truth": {
+    "changed_pixels": 129984,
+    "pct_changed": 49.58,
+    "area_ha": 51.99,
+    "area_m2": 519936.0,
+    "change_direction": "water_expansion",
+    "expected_confidence": 0.97
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "scenario": "Assam Forest Loss",
+  "sensor": "ResourceSat-2A (LISS-IV)",
+  "resolution_m": 5.8,
+  "t1_timestamp": "2023-03-01T05:00:00Z",
+  "t2_timestamp": "2023-11-20T05:15:00Z",
+  "ground_truth": {
+    "changed_pixels": 15516,
+    "pct_changed": 5.92,
+    "area_ha": 52.2,
+    "change_direction": "vegetation_loss",
+    "expected_confidence": 0.94
+  }
+}

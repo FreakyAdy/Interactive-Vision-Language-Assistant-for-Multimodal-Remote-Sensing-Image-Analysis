@@ -1,0 +1,77 @@
+[
+  {
+    "id": "flood_kerala_2023",
+    "title": "Kerala Flood Detection (2023)",
+    "description": "Detect and quantify flood inundation from extreme monsoon event over Periyar river basin.",
+    "sensor": "Cartosat-2S",
+    "image_t1": "demo_data/flood_t1.tif",
+    "image_t2": "demo_data/flood_t2.tif",
+    "example_query": "How much area has been flooded between these two dates?",
+    "expected_answer_summary": "Approximately 11.93 hectares of surface water expansion detected, HIGH confidence (0.97).",
+    "talking_points": [
+      "Rapid disaster assessment for relief teams",
+      "Automated NDWI index auto-selection",
+      "GeoJSON boundary export ready for Bhuvan/VEDAS GIS teams"
+    ]
+  },
+  {
+    "id": "deforestation_assam",
+    "title": "Forest Canopy Loss & Road Encroachment",
+    "description": "Detect selective clearing and logging road expansion in protected evergreen corridor.",
+    "sensor": "ResourceSat-2A",
+    "image_t1": "demo_data/forest_t1.tif",
+    "image_t2": "demo_data/forest_t2.tif",
+    "example_query": "Has this forest area shrunk since last season?",
+    "expected_answer_summary": "Detected 4.2 hectares of canopy loss with linear encroachment pattern, HIGH confidence (0.94).",
+    "talking_points": [
+      "ResourceSat-2A LISS-III calibration",
+      "STSF-Net pseudo-change filter suppresses seasonal leaf color variation",
+      "Direct quantification in hectares"
+    ]
+  },
+  {
+    "id": "urban_expansion_delhi",
+    "title": "Urban Expansion & Built-Up Encroachment",
+    "description": "Identify new construction on agricultural parcels along peri-urban periphery.",
+    "sensor": "Cartosat-3",
+    "image_t1": "demo_data/urban_t1.tif",
+    "image_t2": "demo_data/urban_t2.tif",
+    "example_query": "Identify new construction and urban growth in this sector.",
+    "expected_answer_summary": "Detected 2.8 hectares of new impervious surface / structural growth, HIGH confidence (0.91).",
+    "talking_points": [
+      "NDBI automatic selection",
+      "Sub-meter resolution analysis",
+      "Supports municipal town planning audits"
+    ]
+  },
+  {
+    "id": "agriculture_health",
+    "title": "Agricultural Crop Health & Vigor Assessment",
+    "description": "Quantify vegetative vigor and identify moisture stress across irrigated paddy plots.",
+    "sensor": "ResourceSat-2A",
+    "image_t1": "demo_data/agri_sample.tif",
+    "image_t2": null,
+    "example_query": "Evaluate crop health across these agricultural parcels and highlight stressed zones.",
+    "expected_answer_summary": "Mean NDVI 0.58. 14% of parcel exhibits moderate moisture stress.",
+    "talking_points": [
+      "NDVI + EVI dual index profiling",
+      "Differentiates healthy vs water-stressed crops",
+      "Directly assists agricultural insurance and yield estimation"
+    ]
+  },
+  {
+    "id": "ship_detection_coastal",
+    "title": "Coastal Maritime Surveillance & Vessel Counting",
+    "description": "Locate, segment, and count maritime vessels entering coastal security zone.",
+    "sensor": "RISAT-1C",
+    "image_t1": "demo_data/harbor_sample.tif",
+    "image_t2": null,
+    "example_query": "Count the ships visible in this maritime approach zone.",
+    "expected_answer_summary": "Detected 5 commercial vessels anchored in approach corridor with 92% mean confidence.",
+    "talking_points": [
+      "C-band SAR dual-pol surface backscatter analysis",
+      "All-weather maritime surveillance",
+      "DOTA-calibrated object detector"
+    ]
+  }
+]

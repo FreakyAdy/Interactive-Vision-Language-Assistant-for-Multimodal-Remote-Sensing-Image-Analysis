@@ -1,0 +1,11 @@
+{
+  "scenario": "Delhi NCR Peri-Urban Expansion",
+  "sensor": "Cartosat-3",
+  "ground_truth": {
+    "changed_pixels": 32041,
+    "pct_changed": 12.22,
+    "area_ha": 3.2,
+    "change_direction": "urban_growth",
+    "expected_confidence": 0.91
+  }
+}
