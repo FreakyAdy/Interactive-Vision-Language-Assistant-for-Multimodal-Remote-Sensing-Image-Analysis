@@ -16,121 +16,145 @@
       <stop offset="0%" stop-color="#1E3A8A"/>
       <stop offset="100%" stop-color="#0F172A"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="6" result="blur"/>
-      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
-    </filter>
-    <marker id="arrowOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+
+    <!-- Markers for clean connector arrowheads -->
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#FF6B00"/>
     </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#00D4AA"/>
+    </marker>
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8"/>
+    </marker>
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#FBBF24"/>
     </marker>
   </defs>
 
-  <!-- Background -->
+  <!-- Background Canvas -->
   <rect width="1000" height="700" fill="url(#bgGrad)"/>
 
   <!-- Title & Header -->
-  <text x="50" y="50" font-family="'Inter', sans-serif" font-size="24" font-weight="bold" fill="#FFFFFF">SatQuery AI — System Architecture</text>
-  <text x="50" y="75" font-family="'Inter', sans-serif" font-size="14" fill="#94A3B8">SIH26167 | ISRO Space Applications Centre | Agentic Multi-Modal Architecture</text>
+  <text x="50" y="45" font-family="'Inter', sans-serif" font-size="22" font-weight="bold" fill="#FFFFFF">SatQuery AI — System Architecture</text>
+  <text x="50" y="68" font-family="'Inter', sans-serif" font-size="12" fill="#94A3B8">SIH26167 | ISRO Space Applications Centre | Agentic Multi-Modal Architecture</text>
 
-  <!-- USER NODE -->
-  <rect x="50" y="270" width="130" height="90" rx="10" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
-  <circle cx="115" cy="305" r="16" fill="#38BDF8"/>
-  <text x="115" y="340" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Field Officer</text>
-  <text x="115" y="354" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Disaster / Agri / Forest</text>
+  <!-- ==================== COLUMN 1: USER & CLIENT TIER ==================== -->
+  <!-- Field Officer Node -->
+  <rect x="40" y="270" width="130" height="110" rx="10" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <circle cx="105" cy="305" r="16" fill="#38BDF8"/>
+  <text x="105" y="310" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#0B1628" text-anchor="middle">👤</text>
+  <text x="105" y="342" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Field Officer</text>
+  <text x="105" y="360" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Disaster / Agri / Forest</text>
 
-  <!-- WEB UI -->
-  <rect x="230" y="250" width="160" height="130" rx="10" fill="#0F172A" stroke="#00D4AA" stroke-width="2"/>
-  <rect x="230" y="250" width="160" height="28" rx="10" fill="#1E293B"/>
-  <text x="310" y="269" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">SatQuery Web UI</text>
-  <text x="310" y="305" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Drag-Drop Upload</text>
-  <text x="310" y="325" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Natural Language Prompt</text>
-  <text x="310" y="345" font-family="'Inter', sans-serif" font-size="11" fill="#38BDF8" text-anchor="middle">Leaflet Map Overlay</text>
+  <!-- SatQuery Web UI -->
+  <rect x="210" y="250" width="160" height="150" rx="10" fill="#0F172A" stroke="#00D4AA" stroke-width="2"/>
+  <rect x="210" y="250" width="160" height="30" rx="10" fill="#1E293B"/>
+  <text x="290" y="270" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">SatQuery Web UI</text>
+  <text x="290" y="306" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Drag-Drop Upload</text>
+  <text x="290" y="328" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Natural Language Prompt</text>
+  <text x="290" y="350" font-family="'Inter', sans-serif" font-size="11" fill="#38BDF8" text-anchor="middle">Leaflet Map Overlay</text>
+  <text x="290" y="372" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Dual-View Comparison</text>
 
-  <!-- FASTAPI BACKEND -->
-  <rect x="440" y="240" width="160" height="150" rx="12" fill="#0F172A" stroke="#FF6B00" stroke-width="2"/>
-  <rect x="440" y="240" width="160" height="32" rx="12" fill="url(#orangeGrad)"/>
-  <text x="520" y="262" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FastAPI Gateway</text>
-  <text x="520" y="295" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Async REST Engine</text>
-  <text x="520" y="315" font-family="'Inter', sans-serif" font-size="11" fill="#CBD5E1" text-anchor="middle">Pydantic v2 Schemas</text>
-  <text x="520" y="335" font-family="'Inter', sans-serif" font-size="11" fill="#CBD5E1" text-anchor="middle">OpenAPI / Swagger</text>
-  <text x="520" y="355" font-family="'Inter', sans-serif" font-size="11" fill="#00D4AA" text-anchor="middle">Fail-safe DEMO_MODE</text>
+  <!-- ==================== COLUMN 2: CENTRAL GATEWAY & REASONING CORE ==================== -->
+  <!-- VLM Engine (Top) -->
+  <rect x="420" y="95" width="160" height="110" rx="10" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
+  <text x="500" y="122" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">VLM Engine</text>
+  <text x="500" y="145" font-family="'Inter', sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle">GeoChat-7B (4-bit QLoRA)</text>
+  <text x="500" y="165" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Sensor-Conditioned Prompt</text>
+  <text x="500" y="185" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Chain-of-Thought Reasoning</text>
 
-  <!-- QUERY ROUTER -->
-  <polygon points="660,255 740,315 660,375 580,315" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
-  <text x="660" y="312" font-family="'Inter', sans-serif" font-size="11" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct Router</text>
-  <text x="660" y="326" font-family="'Inter', sans-serif" font-size="9" fill="#94A3B8" text-anchor="middle">Embedding + Ont</text>
+  <!-- FastAPI Gateway (Middle) -->
+  <rect x="420" y="245" width="160" height="160" rx="12" fill="#0F172A" stroke="#FF6B00" stroke-width="2"/>
+  <rect x="420" y="245" width="160" height="32" rx="12" fill="url(#orangeGrad)"/>
+  <text x="500" y="267" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">FastAPI Gateway</text>
+  <text x="500" y="302" font-family="'Inter', sans-serif" font-size="11" fill="#FFFFFF" text-anchor="middle">Async REST Engine</text>
+  <text x="500" y="324" font-family="'Inter', sans-serif" font-size="11" fill="#CBD5E1" text-anchor="middle">Pydantic v2 Schemas</text>
+  <text x="500" y="346" font-family="'Inter', sans-serif" font-size="11" fill="#CBD5E1" text-anchor="middle">OpenAPI / Swagger</text>
+  <text x="500" y="368" font-family="'Inter', sans-serif" font-size="11" fill="#00D4AA" text-anchor="middle">Fail-safe DEMO_MODE</text>
 
-  <!-- 4 PARALLEL TOOL MODULES -->
-  <!-- Tool 1: Change Detector -->
-  <rect x="760" y="110" width="200" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
-  <text x="860" y="135" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
-  <text x="860" y="153" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
-  <text x="860" y="169" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
+  <!-- ISRO Sensor Calibrator (Bottom) -->
+  <rect x="415" y="445" width="170" height="115" rx="10" fill="#151D2A" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="5,5"/>
+  <text x="500" y="470" font-family="'Inter', sans-serif" font-size="11.5" font-weight="bold" fill="#FF6B00" text-anchor="middle">ISRO Sensor Calibrator</text>
+  <text x="500" y="492" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Cartosat-2S / 3 (PAN+MS)</text>
+  <text x="500" y="510" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">RISAT-1C (C-band SAR)</text>
+  <text x="500" y="528" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">ResourceSat-2A (AWiFS)</text>
+  <text x="500" y="546" font-family="'Inter', sans-serif" font-size="10" fill="#38BDF8" text-anchor="middle">EOS-05 (Hyperspectral)</text>
+
+  <!-- ==================== COLUMN 3: AGENTIC ROUTER ==================== -->
+  <polygon points="660,285 700,325 660,365 620,325" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <text x="660" y="322" font-family="'Inter', sans-serif" font-size="11" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct Router</text>
+  <text x="660" y="336" font-family="'Inter', sans-serif" font-size="9" fill="#94A3B8" text-anchor="middle">Embedding + Ont</text>
+
+  <!-- ==================== COLUMN 4: 4 SPECIALIZED TOOL ENGINES ==================== -->
+  <!-- Tool 1: Change Engine -->
+  <rect x="740" y="90" width="220" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
+  <text x="850" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
+  <text x="850" y="133" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
+  <text x="850" y="151" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
 
   <!-- Tool 2: Spectral Engine -->
-  <rect x="760" y="215" width="200" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
-  <text x="860" y="240" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
-  <text x="860" y="258" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
-  <text x="860" y="274" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
+  <rect x="740" y="195" width="220" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
+  <text x="850" y="220" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
+  <text x="850" y="238" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
+  <text x="850" y="256" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
 
   <!-- Tool 3: SAM Segmentor -->
-  <rect x="760" y="320" width="200" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
-  <text x="860" y="345" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
-  <text x="860" y="363" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
-  <text x="860" y="379" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
+  <rect x="740" y="300" width="220" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="850" y="325" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
+  <text x="850" y="343" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
+  <text x="850" y="361" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
 
   <!-- Tool 4: Object Detector -->
-  <rect x="760" y="425" width="200" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
-  <text x="860" y="450" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
-  <text x="860" y="468" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
-  <text x="860" y="484" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
+  <rect x="740" y="405" width="220" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="850" y="430" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
+  <text x="850" y="448" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
+  <text x="850" y="466" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
 
-  <!-- SENSOR CALIBRATION MODULE -->
-  <rect x="440" y="450" width="160" height="110" rx="10" fill="#1E202A" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="4,4"/>
-  <text x="520" y="475" font-family="'Inter', sans-serif" font-size="11" font-weight="bold" fill="#FF6B00" text-anchor="middle">ISRO Sensor Calibrator</text>
-  <text x="520" y="495" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Cartosat-2S / 3 (PAN+MS)</text>
-  <text x="520" y="512" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">RISAT-1C (C-band SAR)</text>
-  <text x="520" y="529" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">ResourceSat-2A (AWiFS)</text>
-  <text x="520" y="546" font-family="'Inter', sans-serif" font-size="10" fill="#38BDF8" text-anchor="middle">EOS-05 (Hyperspectral)</text>
+  <!-- ==================== BOTTOM ROW: OUTPUT DELIVERABLES ==================== -->
+  <!-- Output 1: GeoJSON -->
+  <rect x="180" y="580" width="300" height="85" rx="10" fill="#0F172A" stroke="#00D4AA" stroke-width="2"/>
+  <text x="330" y="608" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#00D4AA" text-anchor="middle">ISRO Bhuvan / VEDAS GeoJSON</text>
+  <text x="330" y="628" font-family="'Inter', sans-serif" font-size="10.5" fill="#E2E8F0" text-anchor="middle">Standard WGS84 EPSG:4326 Vectors</text>
+  <text x="330" y="646" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Direct Import into Disaster Control Rooms</text>
 
-  <!-- VLM ENGINE & REPORT GENERATOR -->
-  <rect x="440" y="90" width="160" height="100" rx="10" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
-  <text x="520" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">VLM Engine</text>
-  <text x="520" y="135" font-family="'Inter', sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle">GeoChat-7B (4-bit QLoRA)</text>
-  <text x="520" y="152" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Sensor-Conditioned Prompt</text>
-  <text x="520" y="169" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Chain-of-Thought Reasoning</text>
+  <!-- Output 2: Report -->
+  <rect x="520" y="580" width="300" height="85" rx="10" fill="#0F172A" stroke="#FF6B00" stroke-width="2"/>
+  <text x="670" y="608" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FF6B00" text-anchor="middle">Operational Disaster Report</text>
+  <text x="670" y="628" font-family="'Inter', sans-serif" font-size="10.5" fill="#E2E8F0" text-anchor="middle">Quantitative Area Metrics &#8226; Action Items</text>
+  <text x="670" y="646" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Full 12-Stage Verifiable Audit Trace</text>
 
-  <!-- OUTPUT NODES -->
-  <rect x="180" y="570" width="260" height="80" rx="10" fill="#0F172A" stroke="#00D4AA" stroke-width="2"/>
-  <text x="310" y="600" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#00D4AA" text-anchor="middle">ISRO Bhuvan / VEDAS GeoJSON</text>
-  <text x="310" y="620" font-family="'Inter', sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Standard WGS84 EPSG:4326 Vectors</text>
-  <text x="310" y="635" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Direct Import into Disaster Control Rooms</text>
+  <!-- ==================== CONNECTORS & DATA FLOW ==================== -->
+  <!-- 1. Field Officer -> Web UI -->
+  <line x1="170" y1="325" x2="210" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
-  <rect x="480" y="570" width="260" height="80" rx="10" fill="#0F172A" stroke="#FF6B00" stroke-width="2"/>
-  <text x="610" y="600" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FF6B00" text-anchor="middle">Operational Disaster Report</text>
-  <text x="610" y="620" font-family="'Inter', sans-serif" font-size="10" fill="#E2E8F0" text-anchor="middle">Quantitative Area Metrics &#8226; Actions</text>
-  <text x="610" y="635" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Full 12-Stage Verifiable Audit Trace</text>
+  <!-- 2. Web UI -> FastAPI Gateway -->
+  <line x1="370" y1="325" x2="420" y2="325" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
-  <!-- ARROWS & CONNECTORS -->
-  <line x1="180" y1="315" x2="230" y2="315" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <line x1="390" y1="315" x2="440" y2="315" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
-  <line x1="600" y1="315" x2="660" y2="315" stroke="#38BDF8" stroke-width="2"/>
-  <line x1="520" y1="390" x2="520" y2="450" stroke="#FF6B00" stroke-width="1.5" stroke-dasharray="3,3"/>
+  <!-- 3. FastAPI Gateway -> ReAct Router -->
+  <line x1="580" y1="325" x2="620" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
-  <!-- Router to Tools -->
-  <path d="M 740 315 L 750 315 L 750 152 L 760 152" fill="none" stroke="#FF6B00" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
-  <path d="M 740 315 L 750 315 L 750 257 L 760 257" fill="none" stroke="#00D4AA" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
-  <path d="M 740 315 L 760 362" fill="none" stroke="#38BDF8" stroke-width="1.5" marker-end="url(#arrowGreen)"/>
-  <path d="M 740 315 L 750 315 L 750 467 L 760 467" fill="none" stroke="#FBBF24" stroke-width="1.5" marker-end="url(#arrowOrange)"/>
+  <!-- 4. Router to 4 Tool Engines (Structured Distribution Bus) -->
+  <path d="M 700 325 L 720 325" fill="none" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="720" y1="132" x2="720" y2="447" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="720" y1="132" x2="740" y2="132" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="720" y1="237" x2="740" y2="237" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="720" y1="342" x2="740" y2="342" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="720" y1="447" x2="740" y2="447" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowYellow)"/>
 
-  <!-- Tools to VLM Engine & Synthesis -->
-  <path d="M 860 110 L 860 70 L 600 70 L 580 90" fill="none" stroke="#00D4AA" stroke-width="1.5"/>
-  <path d="M 520 190 L 520 240" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <!-- 5. Tool Output Feedback to VLM Engine (Clean Overhead Bus) -->
+  <path d="M 850 90 L 850 60 L 500 60 L 500 95" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="675" y="52" font-family="'Inter', sans-serif" font-size="9.5" fill="#00D4AA" text-anchor="middle">Feature Maps &amp; Analytical Detections</text>
 
-  <!-- Backend to Outputs -->
-  <path d="M 460 390 L 460 540 L 310 540 L 310 570" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <path d="M 580 390 L 580 540 L 610 540 L 610 570" fill="none" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <!-- 6. VLM Engine -> FastAPI Gateway -->
+  <line x1="500" y1="205" x2="500" y2="245" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+
+  <!-- 7. FastAPI Gateway <-> ISRO Sensor Calibrator -->
+  <line x1="500" y1="405" x2="500" y2="445" stroke="#FF6B00" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowOrange)"/>
+
+  <!-- 8. Analytical Core to Final Outputs (Clean Bottom Routing, Never Crossing Boxes) -->
+  <!-- Left branch to GeoJSON -->
+  <path d="M 470 560 L 470 570 L 330 570 L 330 580" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <!-- Right branch to Report -->
+  <path d="M 530 560 L 530 570 L 670 570 L 670 580" fill="none" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
 </svg>
