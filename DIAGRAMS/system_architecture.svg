@@ -45,7 +45,7 @@
   <circle cx="105" cy="305" r="16" fill="#38BDF8"/>
   <text x="105" y="310" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#0B1628" text-anchor="middle">👤</text>
   <text x="105" y="342" font-family="'Inter', sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Field Officer</text>
-  <text x="105" y="360" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Disaster / Agri / Forest</text>
+  <text x="105" y="360" font-family="'Inter', sans-serif" font-size="10.5" fill="#94A3B8" text-anchor="middle">Disaster / Agri / Forest</text>
 
   <!-- SatQuery Web UI -->
   <rect x="210" y="250" width="160" height="150" rx="10" fill="#0F172A" stroke="#00D4AA" stroke-width="2"/>
@@ -81,35 +81,36 @@
   <text x="500" y="528" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">ResourceSat-2A (AWiFS)</text>
   <text x="500" y="546" font-family="'Inter', sans-serif" font-size="10" fill="#38BDF8" text-anchor="middle">EOS-05 (Hyperspectral)</text>
 
-  <!-- ==================== COLUMN 3: AGENTIC ROUTER ==================== -->
-  <polygon points="660,285 700,325 660,365 620,325" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
-  <text x="660" y="322" font-family="'Inter', sans-serif" font-size="11" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct Router</text>
-  <text x="660" y="336" font-family="'Inter', sans-serif" font-size="9" fill="#94A3B8" text-anchor="middle">Embedding + Ont</text>
+  <!-- ==================== COLUMN 3: AGENTIC ROUTER (ROOMY & UNCLUTTERED) ==================== -->
+  <polygon points="660,268 718,325 660,382 602,325" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <text x="660" y="310" font-family="'Inter', sans-serif" font-size="11.5" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct</text>
+  <text x="660" y="327" font-family="'Inter', sans-serif" font-size="11.5" font-weight="bold" fill="#38BDF8" text-anchor="middle">Router</text>
+  <text x="660" y="347" font-family="'Inter', sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Embedding + Ont</text>
 
   <!-- ==================== COLUMN 4: 4 SPECIALIZED TOOL ENGINES ==================== -->
   <!-- Tool 1: Change Engine -->
-  <rect x="740" y="90" width="220" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
-  <text x="850" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
-  <text x="850" y="133" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
-  <text x="850" y="151" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
+  <rect x="750" y="90" width="210" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
+  <text x="855" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
+  <text x="855" y="133" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
+  <text x="855" y="151" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
 
   <!-- Tool 2: Spectral Engine -->
-  <rect x="740" y="195" width="220" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
-  <text x="850" y="220" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
-  <text x="850" y="238" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
-  <text x="850" y="256" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
+  <rect x="750" y="195" width="210" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
+  <text x="855" y="220" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
+  <text x="855" y="238" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
+  <text x="855" y="256" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
 
   <!-- Tool 3: SAM Segmentor -->
-  <rect x="740" y="300" width="220" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
-  <text x="850" y="325" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
-  <text x="850" y="343" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
-  <text x="850" y="361" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
+  <rect x="750" y="300" width="210" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="855" y="325" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
+  <text x="855" y="343" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
+  <text x="855" y="361" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
 
   <!-- Tool 4: Object Detector -->
-  <rect x="740" y="405" width="220" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
-  <text x="850" y="430" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
-  <text x="850" y="448" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
-  <text x="850" y="466" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
+  <rect x="750" y="405" width="210" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="855" y="430" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
+  <text x="855" y="448" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
+  <text x="855" y="466" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
 
   <!-- ==================== BOTTOM ROW: OUTPUT DELIVERABLES ==================== -->
   <!-- Output 1: GeoJSON -->
@@ -131,19 +132,19 @@
   <!-- 2. Web UI -> FastAPI Gateway -->
   <line x1="370" y1="325" x2="420" y2="325" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
-  <!-- 3. FastAPI Gateway -> ReAct Router -->
-  <line x1="580" y1="325" x2="620" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <!-- 3. FastAPI Gateway -> ReAct Router (Clear 22px approach) -->
+  <line x1="580" y1="325" x2="602" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
-  <!-- 4. Router to 4 Tool Engines (Structured Distribution Bus) -->
-  <path d="M 700 325 L 720 325" fill="none" stroke="#38BDF8" stroke-width="2"/>
-  <line x1="720" y1="132" x2="720" y2="447" stroke="#38BDF8" stroke-width="2"/>
-  <line x1="720" y1="132" x2="740" y2="132" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
-  <line x1="720" y1="237" x2="740" y2="237" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <line x1="720" y1="342" x2="740" y2="342" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
-  <line x1="720" y1="447" x2="740" y2="447" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowYellow)"/>
+  <!-- 4. Router to 4 Tool Engines (Clean Bus) -->
+  <line x1="718" y1="325" x2="734" y2="325" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="734" y1="132" x2="734" y2="447" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="734" y1="132" x2="750" y2="132" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="734" y1="237" x2="750" y2="237" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="734" y1="342" x2="750" y2="342" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="734" y1="447" x2="750" y2="447" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowYellow)"/>
 
   <!-- 5. Tool Output Feedback to VLM Engine (Clean Overhead Bus) -->
-  <path d="M 850 90 L 850 60 L 500 60 L 500 95" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <path d="M 855 90 L 855 60 L 500 60 L 500 95" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
   <text x="675" y="52" font-family="'Inter', sans-serif" font-size="9.5" fill="#00D4AA" text-anchor="middle">Feature Maps &amp; Analytical Detections</text>
 
   <!-- 6. VLM Engine -> FastAPI Gateway -->
@@ -152,7 +153,7 @@
   <!-- 7. FastAPI Gateway <-> ISRO Sensor Calibrator -->
   <line x1="500" y1="405" x2="500" y2="445" stroke="#FF6B00" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowOrange)"/>
 
-  <!-- 8. Analytical Core to Final Outputs (Clean Bottom Routing, Never Crossing Boxes) -->
+  <!-- 8. Analytical Core to Final Outputs -->
   <!-- Left branch to GeoJSON -->
   <path d="M 470 560 L 470 570 L 330 570 L 330 580" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
   <!-- Right branch to Report -->
