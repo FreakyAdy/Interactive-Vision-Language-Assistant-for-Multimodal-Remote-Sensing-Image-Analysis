@@ -18,16 +18,16 @@
     </linearGradient>
 
     <!-- Markers for clean connector arrowheads -->
-    <marker id="arrowOrange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrowOrange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#FF6B00"/>
     </marker>
-    <marker id="arrowGreen" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrowGreen" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#00D4AA"/>
     </marker>
-    <marker id="arrowBlue" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrowBlue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#38BDF8"/>
     </marker>
-    <marker id="arrowYellow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <marker id="arrowYellow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
       <path d="M 0 1 L 10 5 L 0 9 z" fill="#FBBF24"/>
     </marker>
   </defs>
@@ -81,36 +81,35 @@
   <text x="500" y="528" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">ResourceSat-2A (AWiFS)</text>
   <text x="500" y="546" font-family="'Inter', sans-serif" font-size="10" fill="#38BDF8" text-anchor="middle">EOS-05 (Hyperspectral)</text>
 
-  <!-- ==================== COLUMN 3: AGENTIC ROUTER (ROOMY & UNCLUTTERED) ==================== -->
-  <polygon points="660,268 718,325 660,382 602,325" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
-  <text x="660" y="310" font-family="'Inter', sans-serif" font-size="11.5" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct</text>
-  <text x="660" y="327" font-family="'Inter', sans-serif" font-size="11.5" font-weight="bold" fill="#38BDF8" text-anchor="middle">Router</text>
-  <text x="660" y="347" font-family="'Inter', sans-serif" font-size="8.5" fill="#94A3B8" text-anchor="middle">Embedding + Ont</text>
+  <!-- ==================== COLUMN 3: AGENTIC ROUTER (130px WIDE DIAMOND) ==================== -->
+  <polygon points="665,275 730,325 665,375 600,325" fill="#1E293B" stroke="#38BDF8" stroke-width="2"/>
+  <text x="665" y="321" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">ReAct Router</text>
+  <text x="665" y="337" font-family="'Inter', sans-serif" font-size="9" fill="#94A3B8" text-anchor="middle">Agentic Planner</text>
 
   <!-- ==================== COLUMN 4: 4 SPECIALIZED TOOL ENGINES ==================== -->
   <!-- Tool 1: Change Engine -->
-  <rect x="750" y="90" width="210" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
-  <text x="855" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
-  <text x="855" y="133" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
-  <text x="855" y="151" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
+  <rect x="765" y="90" width="200" height="85" rx="8" fill="#1E293B" stroke="#FF6B00" stroke-width="1.5"/>
+  <text x="865" y="115" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FF6B00" text-anchor="middle">12-Stage Change Engine</text>
+  <text x="865" y="133" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">STSF-Net Pseudo Suppression</text>
+  <text x="865" y="151" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Otsu &#8226; Bimodal Metric (ω, v, p)</text>
 
   <!-- Tool 2: Spectral Engine -->
-  <rect x="750" y="195" width="210" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
-  <text x="855" y="220" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
-  <text x="855" y="238" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
-  <text x="855" y="256" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
+  <rect x="765" y="195" width="200" height="85" rx="8" fill="#1E293B" stroke="#00D4AA" stroke-width="1.5"/>
+  <text x="865" y="220" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#00D4AA" text-anchor="middle">Spectral Indices Engine</text>
+  <text x="865" y="238" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">NDVI, NDWI, NDBI, EVI, RVI</text>
+  <text x="865" y="256" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Physical Interpretation Logic</text>
 
   <!-- Tool 3: SAM Segmentor -->
-  <rect x="750" y="300" width="210" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
-  <text x="855" y="325" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
-  <text x="855" y="343" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
-  <text x="855" y="361" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
+  <rect x="765" y="300" width="200" height="85" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-width="1.5"/>
+  <text x="865" y="325" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#38BDF8" text-anchor="middle">SAM Segmentor</text>
+  <text x="865" y="343" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Promptable Land-Cover Masks</text>
+  <text x="865" y="361" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Water &#8226; Forest &#8226; Urban Polygons</text>
 
   <!-- Tool 4: Object Detector -->
-  <rect x="750" y="405" width="210" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
-  <text x="855" y="430" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
-  <text x="855" y="448" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
-  <text x="855" y="466" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
+  <rect x="765" y="405" width="200" height="85" rx="8" fill="#1E293B" stroke="#FBBF24" stroke-width="1.5"/>
+  <text x="865" y="430" font-family="'Inter', sans-serif" font-size="12" font-weight="bold" fill="#FBBF24" text-anchor="middle">DOTA Object Counter</text>
+  <text x="865" y="448" font-family="'Inter', sans-serif" font-size="10" fill="#CBD5E1" text-anchor="middle">Oriented Bounding Boxes</text>
+  <text x="865" y="466" font-family="'Inter', sans-serif" font-size="10" fill="#94A3B8" text-anchor="middle">Maritime Ships &#8226; Tanks &#8226; Vehicles</text>
 
   <!-- ==================== BOTTOM ROW: OUTPUT DELIVERABLES ==================== -->
   <!-- Output 1: GeoJSON -->
@@ -127,31 +126,31 @@
 
   <!-- ==================== CONNECTORS & DATA FLOW ==================== -->
   <!-- 1. Field Officer -> Web UI -->
-  <line x1="170" y1="325" x2="210" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="170" y1="325" x2="208" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
   <!-- 2. Web UI -> FastAPI Gateway -->
-  <line x1="370" y1="325" x2="420" y2="325" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="370" y1="325" x2="418" y2="325" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
 
-  <!-- 3. FastAPI Gateway -> ReAct Router (Clear 22px approach) -->
-  <line x1="580" y1="325" x2="602" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <!-- 3. FastAPI Gateway -> ReAct Router (Clear approach, stops at diamond apex) -->
+  <line x1="580" y1="325" x2="598" y2="325" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
 
   <!-- 4. Router to 4 Tool Engines (Clean Bus) -->
-  <line x1="718" y1="325" x2="734" y2="325" stroke="#38BDF8" stroke-width="2"/>
-  <line x1="734" y1="132" x2="734" y2="447" stroke="#38BDF8" stroke-width="2"/>
-  <line x1="734" y1="132" x2="750" y2="132" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
-  <line x1="734" y1="237" x2="750" y2="237" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <line x1="734" y1="342" x2="750" y2="342" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
-  <line x1="734" y1="447" x2="750" y2="447" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowYellow)"/>
+  <line x1="730" y1="325" x2="746" y2="325" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="746" y1="132" x2="746" y2="447" stroke="#38BDF8" stroke-width="2"/>
+  <line x1="746" y1="132" x2="765" y2="132" stroke="#FF6B00" stroke-width="2" marker-end="url(#arrowOrange)"/>
+  <line x1="746" y1="237" x2="765" y2="237" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="746" y1="342" x2="765" y2="342" stroke="#38BDF8" stroke-width="2" marker-end="url(#arrowBlue)"/>
+  <line x1="746" y1="447" x2="765" y2="447" stroke="#FBBF24" stroke-width="2" marker-end="url(#arrowYellow)"/>
 
   <!-- 5. Tool Output Feedback to VLM Engine (Clean Overhead Bus) -->
-  <path d="M 855 90 L 855 60 L 500 60 L 500 95" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
-  <text x="675" y="52" font-family="'Inter', sans-serif" font-size="9.5" fill="#00D4AA" text-anchor="middle">Feature Maps &amp; Analytical Detections</text>
+  <path d="M 865 90 L 865 60 L 500 60 L 500 93" fill="none" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <text x="682" y="52" font-family="'Inter', sans-serif" font-size="9.5" fill="#00D4AA" text-anchor="middle">Feature Maps &amp; Analytical Detections</text>
 
   <!-- 6. VLM Engine -> FastAPI Gateway -->
-  <line x1="500" y1="205" x2="500" y2="245" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
+  <line x1="500" y1="205" x2="500" y2="243" stroke="#00D4AA" stroke-width="2" marker-end="url(#arrowGreen)"/>
 
   <!-- 7. FastAPI Gateway <-> ISRO Sensor Calibrator -->
-  <line x1="500" y1="405" x2="500" y2="445" stroke="#FF6B00" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowOrange)"/>
+  <line x1="500" y1="405" x2="500" y2="443" stroke="#FF6B00" stroke-width="2" stroke-dasharray="4,4" marker-end="url(#arrowOrange)"/>
 
   <!-- 8. Analytical Core to Final Outputs -->
   <!-- Left branch to GeoJSON -->
