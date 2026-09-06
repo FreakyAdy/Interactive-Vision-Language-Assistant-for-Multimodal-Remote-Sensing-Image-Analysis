@@ -32,15 +32,26 @@ from scipy import ndimage
 from skimage.filters import threshold_otsu
 from skimage.morphology import opening as binary_opening, closing as binary_closing, disk
 
-from backend.core.spectral_indices import (
-    auto_select_index,
-    compute_ndvi,
-    compute_ndwi,
-    compute_ndbi,
-    compute_evi,
-    compute_rvi,
-    interpret_index_value,
-)
+try:
+    from backend.core.spectral_indices import (
+        auto_select_index,
+        compute_ndvi,
+        compute_ndwi,
+        compute_ndbi,
+        compute_evi,
+        compute_rvi,
+        interpret_index_value,
+    )
+except ImportError:
+    from core.spectral_indices import (
+        auto_select_index,
+        compute_ndvi,
+        compute_ndwi,
+        compute_ndbi,
+        compute_evi,
+        compute_rvi,
+        interpret_index_value,
+    )
 
 logger = logging.getLogger(__name__)
 

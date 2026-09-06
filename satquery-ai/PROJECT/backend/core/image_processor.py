@@ -26,9 +26,10 @@ except ImportError:
     HAS_RASTERIO = False
     logger.warning("rasterio not installed — GeoTIFF support disabled; falling back to PIL")
 
-from PIL import Image
-
-from backend.config import SUPPORTED_FORMATS, MAX_IMAGE_SIZE_MB, SENSOR_METADATA
+try:
+    from backend.config import SUPPORTED_FORMATS, MAX_IMAGE_SIZE_MB, SENSOR_METADATA
+except ImportError:
+    from config import SUPPORTED_FORMATS, MAX_IMAGE_SIZE_MB, SENSOR_METADATA
 
 
 # ┌──────────────────────────────────────────────────────────────────────────┐

@@ -13,9 +13,10 @@ import logging
 import re
 from typing import Any
 
-import numpy as np
-
-from backend.config import settings
+try:
+    from backend.config import settings
+except ImportError:
+    from config import settings
 
 logger = logging.getLogger(__name__)
 
