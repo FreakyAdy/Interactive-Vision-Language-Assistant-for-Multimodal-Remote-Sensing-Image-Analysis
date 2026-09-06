@@ -10,8 +10,9 @@ on query keywords — ensuring the demo works without GPU or model weights.
 from __future__ import annotations
 
 import logging
-import re
 from typing import Any
+
+import numpy as np
 
 try:
     from backend.config import settings
@@ -387,90 +388,6 @@ _DEMO_RESPONSES: dict[str, dict[str, Any]] = {
             "Update property tax cadastral database with new building footprints"
         ]
     },
-    "flood": {
-        "answer": (
-            "Significant flood inundation detected in the study area. "
-            "Approximately 11.93 hectares of surface water expansion has been identified, "
-            "spanning 2 distinct inundation zones. The NDWI analysis reveals values "
-            "increasing from 0.2 (pre-event) to 0.7 (post-event) in affected regions, "
-            "confirming standing water presence. The flood extent primarily follows "
-            "the natural drainage pattern with lateral spread into low-lying agricultural land."
-        ),
-        "confidence": 0.97,
-        "reasoning_steps": [
-            "Identified sensor as Cartosat-2S from image metadata",
-            "Detected bi-temporal input — activated change detection pipeline",
-            "Auto-selected NDWI (Normalised Difference Water Index) based on query keywords",
-            "Computed NDWI for both timestamps: T1 mean=0.18, T2 mean=0.52",
-            "Generated signed difference map — positive values indicate water expansion",
-            "Applied STSF-Net pseudo-change suppression — removed 9,262 false-positive pixels",
-            "Otsu thresholding identified 29,831 changed pixels (45.5% of scene)",
-            "Connected component analysis found 2 distinct flood zones",
-            "Bimodal confidence score: ω=0.89, v=0.93, p=0.78 → 0.967 (HIGH)",
-        ],
-        "highlighted_regions": [
-            {"region_id": 1, "type": "flood_zone", "area_ha": 8.2, "location": "south-west quadrant"},
-            {"region_id": 2, "type": "flood_zone", "area_ha": 3.73, "location": "central lowland"},
-        ],
-        "recommended_actions": [
-            "Deploy rescue teams to the 2 identified inundation zones",
-            "Monitor NDWI trend over next 48 hours for recession tracking",
-            "Cross-reference with drainage network GIS data for prediction",
-            "Download GeoJSON for integration with ISRO VEDAS/Bhuvan",
-        ],
-    },
-    "vegetation": {
-        "answer": (
-            "Vegetation health analysis reveals heterogeneous conditions across the study area. "
-            "The mean NDVI is 0.52 (moderate vegetation cover), with a high-health zone "
-            "(NDVI 0.7-0.85) in the north-eastern quadrant indicating dense forest canopy, "
-            "and a stress zone (NDVI 0.15-0.25) in the southern agricultural fields "
-            "suggesting possible water stress or early-stage crop disease."
-        ),
-        "confidence": 0.89,
-        "reasoning_steps": [
-            "Processed multispectral input with NIR and Red bands",
-            "Computed NDVI across full scene: range [-0.05, 0.85], mean 0.52",
-            "Segmented into 3 vegetation health zones using k-means clustering",
-            "Identified stress indicators in agricultural parcels",
-        ],
-        "highlighted_regions": [
-            {"region_id": 1, "type": "healthy_vegetation", "ndvi_mean": 0.78, "location": "NE quadrant"},
-            {"region_id": 2, "type": "stressed_vegetation", "ndvi_mean": 0.20, "location": "S fields"},
-        ],
-        "recommended_actions": [
-            "Schedule field visit to stressed agricultural parcels",
-            "Compare with soil moisture data from RISAT-1C SAR imagery",
-            "Recommend irrigation for zones with NDVI below 0.25",
-            "Re-image area in 2 weeks to track stress progression",
-        ],
-    },
-    "building": {
-        "answer": (
-            "Object detection analysis identified 47 building structures in the study area. "
-            "The buildings are concentrated in two clusters: a dense residential zone "
-            "(32 structures, north-central) and a dispersed settlement pattern "
-            "(15 structures, south-east). Average building footprint is approximately "
-            "120 m². No unauthorized encroachment detected in the buffer zone "
-            "around the marked protected area."
-        ),
-        "confidence": 0.84,
-        "reasoning_steps": [
-            "Applied DOTA-trained object detection model to 0.65m Cartosat-2S imagery",
-            "Detected 47 building footprints with IoU threshold 0.5",
-            "Classified into residential (42) and commercial/institutional (5)",
-            "Cross-referenced with protected area boundary — no overlap detected",
-        ],
-        "highlighted_regions": [
-            {"region_id": 1, "type": "building_cluster", "count": 32, "location": "north-central"},
-            {"region_id": 2, "type": "building_cluster", "count": 15, "location": "south-east"},
-        ],
-        "recommended_actions": [
-            "Verify count with ground survey for accuracy assessment",
-            "Monitor quarterly for new construction detection",
-            "Export building footprints as GeoJSON for urban planning GIS",
-        ],
-    },
     "deforestation": {
         "answer": (
             "Deforestation analysis reveals a significant loss of 3.21 hectares of forest cover "
@@ -496,30 +413,6 @@ _DEMO_RESPONSES: dict[str, dict[str, Any]] = {
             "Deploy field verification team to coordinates",
             "Set up bi-weekly monitoring alert for continued clearing",
             "Report to State Forest Department and MoEFCC",
-        ],
-    },
-    "urban": {
-        "answer": (
-            "Urban expansion analysis shows 2.14 hectares of new built-up area development "
-            "on the western fringe of the settlement. NDBI values increased from -0.3 "
-            "(agricultural) to +0.4 (impervious surface) in the expansion zone. "
-            "The development pattern suggests planned residential construction "
-            "with regular plot divisions."
-        ),
-        "confidence": 0.86,
-        "reasoning_steps": [
-            "Bi-temporal NDBI computation: T1 mean -0.15, T2 mean 0.08",
-            "Change detection identified 5,350 pixels of NDBI increase",
-            "Morphological analysis: regular grid pattern in expansion zone",
-            "Area: 2.14 ha of new impervious surface (8.2% of scene)",
-        ],
-        "highlighted_regions": [
-            {"region_id": 1, "type": "urban_expansion", "area_ha": 2.14, "location": "western fringe"},
-        ],
-        "recommended_actions": [
-            "Verify construction permits for identified expansion zone",
-            "Update land-use/land-cover maps for the district",
-            "Monitor for further encroachment into agricultural land",
         ],
     },
     "default": {
